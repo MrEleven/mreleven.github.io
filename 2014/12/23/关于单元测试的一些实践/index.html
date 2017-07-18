@@ -1,0 +1,694 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="基础," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
+
+
+
+
+
+
+<meta name="description" content="刚进公司的时候第一次听说自动化测试和自动化运帷的概念。后来项目大了之后，平凡上下线，最耗时的事情就是测试了。之前就听说过TDD(Test-Dtriven Development)，但是那个时候也只是听听，知道那么回事。近段时间交易项目平凡上下线，改动较大，由于测试不完全，导致了不少问题。于是我决定在项目中加入单元测试。 Python中标准库自带的单元测试模块(unittest也叫pyunit)。">
+<meta name="keywords" content="基础">
+<meta property="og:type" content="article">
+<meta property="og:title" content="关于单元测试的一些东西">
+<meta property="og:url" content="http://mreleven.com/2014/12/23/关于单元测试的一些实践/index.html">
+<meta property="og:site_name" content="Eleven&#39;s blog">
+<meta property="og:description" content="刚进公司的时候第一次听说自动化测试和自动化运帷的概念。后来项目大了之后，平凡上下线，最耗时的事情就是测试了。之前就听说过TDD(Test-Dtriven Development)，但是那个时候也只是听听，知道那么回事。近段时间交易项目平凡上下线，改动较大，由于测试不完全，导致了不少问题。于是我决定在项目中加入单元测试。 Python中标准库自带的单元测试模块(unittest也叫pyunit)。">
+<meta property="og:updated_time" content="2017-07-18T14:08:10.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="关于单元测试的一些东西">
+<meta name="twitter:description" content="刚进公司的时候第一次听说自动化测试和自动化运帷的概念。后来项目大了之后，平凡上下线，最耗时的事情就是测试了。之前就听说过TDD(Test-Dtriven Development)，但是那个时候也只是听听，知道那么回事。近段时间交易项目平凡上下线，改动较大，由于测试不完全，导致了不少问题。于是我决定在项目中加入单元测试。 Python中标准库自带的单元测试模块(unittest也叫pyunit)。">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://mreleven.com/2014/12/23/关于单元测试的一些实践/"/>
+
+
+
+
+
+  <title>关于单元测试的一些东西 | Eleven's blog</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Eleven's blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://mreleven.com/2014/12/23/关于单元测试的一些实践/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Mr.Eleven">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://avatars1.githubusercontent.com/u/6140047?v=4&s=460">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Eleven's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">关于单元测试的一些东西</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2014-12-23T00:00:00+08:00">
+                2014-12-23
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/基础/" itemprop="url" rel="index">
+                    <span itemprop="name">基础</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>刚进公司的时候第一次听说自动化测试和自动化运帷的概念。后来项目大了之后，平凡上下线，最耗时的事情就是测试了。之前就听说过TDD(Test-Dtriven Development)，但是那个时候也只是听听，知道那么回事。近段时间交易项目平凡上下线，改动较大，由于测试不完全，导致了不少问题。于是我决定在项目中加入单元测试。</p>
+<p>Python中标准库自带的单元测试模块(unittest也叫pyunit)。</p>
+<p>pyunit中又四个重要的概念</p>
+<p>test fixture : 每个固件执行完之后都会调用清理函数tearDown，在执行之前都会执行初始化函数setUp。</p>
+<p>test case : 测试用例，就是一个最小单元的测试。注意：这里的测试用例的概念和unittest.TestCase的概念不一样，这里的test case是unittest.TestCase中以test开头的函数，TestCase之所叫TestCase只不过是因为很多初始化和清理的函数相同，可以写到一起。</p>
+<p>test suite : 这是一些test case的集合。</p>
+<p>test runner : 测试执行。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">def setUpModule():</div><div class="line">    print &apos;setUpModule() executed&apos;</div><div class="line"></div><div class="line">def tearDownModule():</div><div class="line">    print &apos;tearDownModule() executed&apos;</div><div class="line"></div><div class="line">class ElevenTest(unittest.TestCase):</div><div class="line">      @classmethod</div><div class="line">      def setUpClass(cls):</div><div class="line">      	  print &apos;setUpClass() executed&apos;</div><div class="line"></div><div class="line">      @classmethod</div><div class="line">      def tearDown(cls):</div><div class="line">      	  print &apos;tearDownClass() executed&apos;</div><div class="line"></div><div class="line">      def setUp(self):</div><div class="line">      	  print &apos;setUp() executed&apos;</div><div class="line"></div><div class="line">      def tearDwon(self):</div><div class="line">      	  print &apos;tearDown() executed&apos;</div><div class="line"></div><div class="line">      def test_test1(self):</div><div class="line">      	  self.assertEqual(1, 2)</div><div class="line"></div><div class="line">      def test_test2(self):</div><div class="line">      	  self.assertEqual(1, 2)</div></pre></td></tr></table></figure>
+<p>这里的ElevenTest类继承自TestCase，但是这个类不是一个测试用例，它里面又两个测试方法，这里的测试方法才是测试用例。注意，只有方法名以test开头的才会被当成是测试方法，不然不会记录统计。</p>
+<p>这里的每一个测试方法都是一个text fixture，也就是说没执行一个测试方法都会调用setUp和tearDown方法。ElevenTest也是一个text fixture，当ElevenTest执行完之后，会执行setUpClass和tearDownClass。同时这整个文件(module)也是一个text fixture，当这个module执行完之后会调用setUpModule和tearDownModule方法。</p>
+<p>当然test suite可以包含很多unittest.TestCase，同时它也能包含其他TestSuite。</p>
+<p>unittest模块只是争对单元测试开发的，用起来很方便，但是对于集成测试没有什么十分大的作用。之前我的做法是事先将所有的环境建好，所有的测试用力全部放在一套单独的数据库中，后来想想既然模块中提供了setUp和tearDown方法，就在初始化的时候就把测试的环境建好了，然后在tearDown将环境恢复。创建环境的大部分操作都是有相同部分的。所以可以单独给自己写一个测试基类。另外环境相同的测试方法可以放在同一个TestCase中。</p>
+<p>unittest: <a href="https://docs.python.org/2/library/unittest.html#" target="_blank" rel="external">https://docs.python.org/2/library/unittest.html#</a></p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/基础/" rel="tag"># 基础</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2014/12/18/以机器指令的角度看过程调用/" rel="next" title="以机器指令的角度看过程调用">
+                <i class="fa fa-chevron-left"></i> 以机器指令的角度看过程调用
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2015/01/01/I_Love_PY/" rel="prev" title="你好，2015">
+                你好，2015 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <section class="site-overview sidebar-panel sidebar-panel-active">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="https://avatars1.githubusercontent.com/u/6140047?v=4&s=460"
+               alt="Mr.Eleven" />
+          <p class="site-author-name" itemprop="name">Mr.Eleven</p>
+           
+              <p class="site-description motion-element" itemprop="description">蚂蚁没见过大海，不代表沧海不存在！</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">31</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              
+                <span class="site-state-item-count">17</span>
+                <span class="site-state-item-name">分类</span>
+              
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              
+                <span class="site-state-item-count">18</span>
+                <span class="site-state-item-name">标签</span>
+              
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Mr.Eleven</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Muse
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

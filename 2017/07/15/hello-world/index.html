@@ -1,0 +1,677 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
+
+
+
+
+
+
+<meta name="description" content="今天重新整理了一下博客，之前因为mac上ruby版本的问题，导致jekyll的使用异常蛋疼，就一直荒废着。这几天又来兴致整理博客了，索性就把我的博客从jekyll迁移到了hexo。hexo的文档和使用给我的感觉比jekyll要好。 关于杭州的房子这几天想重新整理博客的一个原因可能就是忙着买房子的事情吧。其实对于我自己来说，房子真的不算是什么需求，毕竟单身狗当了快三十年了，到哪都是一个狗窝。不过房子">
+<meta property="og:type" content="article">
+<meta property="og:title" content="抛弃Jekyll，转移到Hexo">
+<meta property="og:url" content="http://mreleven.com/2017/07/15/hello-world/index.html">
+<meta property="og:site_name" content="Eleven&#39;s blog">
+<meta property="og:description" content="今天重新整理了一下博客，之前因为mac上ruby版本的问题，导致jekyll的使用异常蛋疼，就一直荒废着。这几天又来兴致整理博客了，索性就把我的博客从jekyll迁移到了hexo。hexo的文档和使用给我的感觉比jekyll要好。 关于杭州的房子这几天想重新整理博客的一个原因可能就是忙着买房子的事情吧。其实对于我自己来说，房子真的不算是什么需求，毕竟单身狗当了快三十年了，到哪都是一个狗窝。不过房子">
+<meta property="og:updated_time" content="2017-07-18T14:08:10.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="抛弃Jekyll，转移到Hexo">
+<meta name="twitter:description" content="今天重新整理了一下博客，之前因为mac上ruby版本的问题，导致jekyll的使用异常蛋疼，就一直荒废着。这几天又来兴致整理博客了，索性就把我的博客从jekyll迁移到了hexo。hexo的文档和使用给我的感觉比jekyll要好。 关于杭州的房子这几天想重新整理博客的一个原因可能就是忙着买房子的事情吧。其实对于我自己来说，房子真的不算是什么需求，毕竟单身狗当了快三十年了，到哪都是一个狗窝。不过房子">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://mreleven.com/2017/07/15/hello-world/"/>
+
+
+
+
+
+  <title>抛弃Jekyll，转移到Hexo | Eleven's blog</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Eleven's blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://mreleven.com/2017/07/15/hello-world/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Mr.Eleven">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://avatars1.githubusercontent.com/u/6140047?v=4&s=460">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Eleven's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">抛弃Jekyll，转移到Hexo</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-07-15T00:00:00+08:00">
+                2017-07-15
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>今天重新整理了一下博客，之前因为mac上ruby版本的问题，导致jekyll的使用异常蛋疼，就一直荒废着。这几天又来兴致整理博客了，索性就把我的博客从jekyll迁移到了hexo。hexo的文档和使用给我的感觉比jekyll要好。</p>
+<h3 id="关于杭州的房子"><a href="#关于杭州的房子" class="headerlink" title="关于杭州的房子"></a>关于杭州的房子</h3><p>这几天想重新整理博客的一个原因可能就是忙着买房子的事情吧。其实对于我自己来说，房子真的不算是什么需求，毕竟单身狗当了快三十年了，到哪都是一个狗窝。不过房子确实是一个不错的保值品，尽管杭州的房子不会涨价太多。以前我总是不知道，千万富翁是如何理财的，博士告诉我他们是把钱放在私人银行，但是我身边更多的有钱人是通过买房子用来保存他们的财富的。其实我的目标是独栋别墅，但是远远买不起，现在如果买了房子，我也是会把房子做成一个小工作室，一个属于自己的小工作室对我来说吸引力还是非常大的。</p>
+<h3 id="关于数字货币"><a href="#关于数字货币" class="headerlink" title="关于数字货币"></a>关于数字货币</h3><p>近段时间大家都在疯狂地投资数字货币，但是数字货币的红利期已经过去了，现在入场基本只能当接盘侠。从数字货币的事情当中我明白了一个事情，对于一个新鲜事物，我们不能排斥，也不能鄙视，而是要有一颗敬畏之心，学习它。想起大二的时候，端端邀请我和他一起去挖比特币，结果当时我看不起虚拟货币，错过了一次开兰博基尼的机会。这次投资数字货币，还算幸运，赶上了最后一波红利，在暴跌之前离了场。不过我坚信“区块链”技术以后必定颠覆当前的互联网。</p>
+<h3 id="关于工作"><a href="#关于工作" class="headerlink" title="关于工作"></a>关于工作</h3><p>上周我的“hurcan”项目终于上线了，在给运营的妹纸们做简单的培训之后，她们基本也都会用了。hurcan是兰博基尼的一款车型，之所以这个项目叫hurcan，是因为前段时间领悟到一个道理：程序员也是工程师，就跟造兰博基尼的工程师是一样的。如果把写代码的工作当作是制造兰博基尼，那么工作就会变得十分有意义。认认真真做一款产品的人都很有魅力，这可能就是所谓的工匠精神吧。因为目前我在公司定位主要是运营活动和信用卡还款方面的东西，所以我希望我的这个项目能跟兰博基尼一样是一件艺术品。<br>我喜欢做东西，我享受做东西的过程，所以我想学前端，hurcan项目的UI是用bootstrap + avalon.js写的，UI和体验真的是好差。尤其是Jquery那些异步回调的方法，代码布局乱七八糟，css命名也是乱七八糟，毕竟我还只是个业余爱好者。所以我想在工作之余好好学学前端知识，毕竟公司有这么多前端老司机带，解决问题就方便很多了。先从bootstrap和react.js开始吧。</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/04/19/一个合格的程序员/" rel="next" title="一个合格的程序员">
+                <i class="fa fa-chevron-left"></i> 一个合格的程序员
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="https://avatars1.githubusercontent.com/u/6140047?v=4&s=460"
+               alt="Mr.Eleven" />
+          <p class="site-author-name" itemprop="name">Mr.Eleven</p>
+           
+              <p class="site-description motion-element" itemprop="description">蚂蚁没见过大海，不代表沧海不存在！</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">31</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              
+                <span class="site-state-item-count">17</span>
+                <span class="site-state-item-name">分类</span>
+              
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              
+                <span class="site-state-item-count">18</span>
+                <span class="site-state-item-name">标签</span>
+              
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#关于杭州的房子"><span class="nav-number">1.</span> <span class="nav-text">关于杭州的房子</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#关于数字货币"><span class="nav-number">2.</span> <span class="nav-text">关于数字货币</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#关于工作"><span class="nav-number">3.</span> <span class="nav-text">关于工作</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Mr.Eleven</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Muse
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

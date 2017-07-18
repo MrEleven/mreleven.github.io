@@ -77,7 +77,7 @@
 <link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="Mysql," />
 
 
 
@@ -93,15 +93,17 @@
 
 
 
-<meta name="description" content="蚂蚁没见过大海，不代表沧海不存在！">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Eleven&#39;s blog">
-<meta property="og:url" content="http://mreleven.com/archives/2017/index.html">
+<meta name="description" content="Mysql命令整理 要理解Mysql内部查询机制首先要学会使用Explain命令。  mysql&amp;gt; explain select * from orders where serial_id = &apos;0010001505180005fm&apos;; +----+-------------+--------+------+---------------+-----------+---------+-------">
+<meta name="keywords" content="Mysql">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Mysql Explain命令整理">
+<meta property="og:url" content="http://mreleven.com/2015/07/19/Explain命令/index.html">
 <meta property="og:site_name" content="Eleven&#39;s blog">
-<meta property="og:description" content="蚂蚁没见过大海，不代表沧海不存在！">
+<meta property="og:description" content="Mysql命令整理 要理解Mysql内部查询机制首先要学会使用Explain命令。  mysql&amp;gt; explain select * from orders where serial_id = &apos;0010001505180005fm&apos;; +----+-------------+--------+------+---------------+-----------+---------+-------">
+<meta property="og:updated_time" content="2017-07-18T14:08:10.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Eleven&#39;s blog">
-<meta name="twitter:description" content="蚂蚁没见过大海，不代表沧海不存在！">
+<meta name="twitter:title" content="Mysql Explain命令整理">
+<meta name="twitter:description" content="Mysql命令整理 要理解Mysql内部查询机制首先要学会使用Explain命令。  mysql&amp;gt; explain select * from orders where serial_id = &apos;0010001505180005fm&apos;; +----+-------------+--------+------+---------------+-----------+---------+-------">
 
 
 
@@ -129,13 +131,13 @@
 
 
 
-  <link rel="canonical" href="http://mreleven.com/archives/2017/"/>
+  <link rel="canonical" href="http://mreleven.com/2015/07/19/Explain命令/"/>
 
 
 
 
 
-  <title>归档 | Eleven's blog</title>
+  <title>Mysql Explain命令整理 | Eleven's blog</title>
   
 
 
@@ -160,7 +162,7 @@
     
   
 
-  <div class="container sidebar-position-left  page-archive  ">
+  <div class="container sidebar-position-left page-post-detail ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -244,213 +246,219 @@
           <div id="content" class="content">
             
 
-  <section id="posts" class="posts-collapse">
-    <span class="archive-move-on"></span>
-
-    <span class="archive-page-counter">
-      
-      
-       
-      
-      OK! 目前共计 31 篇日志。 继续努力。
-    </span>
-
+  <div id="posts" class="posts-expand">
     
-
-      
-      
-      
-
-      
-        
-        <div class="collection-title">
-          <h2 class="archive-year motion-element" id="archive-year-2017">2017</h2>
-        </div>
-      
-      
-
-      
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2017/07/15/hello-world/" itemprop="url">
-              
-                <span itemprop="name">抛弃Jekyll，转移到Hexo</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2017-07-15T00:00:00+08:00"
-              content="2017-07-15" >
-          07-15
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-    
-
-      
-      
-      
-
-      
-      
-
-      
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2017/04/19/一个合格的程序员/" itemprop="url">
-              
-                <span itemprop="name">一个合格的程序员</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2017-04-19T00:00:00+08:00"
-              content="2017-04-19" >
-          04-19
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-    
-
-      
-      
-      
-
-      
-      
-
-      
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2017/04/05/spring中的环境/" itemprop="url">
-              
-                <span itemprop="name">spring中的环境Enviroment</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2017-04-05T00:00:00+08:00"
-              content="2017-04-05" >
-          04-05
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-    
-
-      
-      
-      
-
-      
-      
-
-      
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2017/01/19/让我们一起加入这万米云端的历险！！！/" itemprop="url">
-              
-                <span itemprop="name">让我们一起加入这万米云端的历险！！</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2017-01-19T00:00:00+08:00"
-              content="2017-01-19" >
-          01-19
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-    
-
-      
-      
-      
-
-      
-      
-
-      
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2017/01/01/你好2017/" itemprop="url">
-              
-                <span itemprop="name">你好，2017</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2017-01-01T00:00:00+08:00"
-              content="2017-01-01" >
-          01-01
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-    
-
-  </section>
 
   
 
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://mreleven.com/2015/07/19/Explain命令/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Mr.Eleven">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://avatars1.githubusercontent.com/u/6140047?v=4&s=460">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Eleven's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Mysql Explain命令整理</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2015-07-19T00:00:00+08:00">
+                2015-07-19
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Mysql/" itemprop="url" rel="index">
+                    <span itemprop="name">Mysql</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>Mysql命令整理</p>
+<p>要理解Mysql内部查询机制首先要学会使用Explain命令。</p>
+<pre>
+mysql> explain select * from orders where serial_id = '0010001505180005fm';
++----+-------------+--------+------+---------------+-----------+---------+-------+------+-------------+
+| id | select_type | table  | type | possible_keys | key       | key_len | ref   | rows | Extra       |
++----+-------------+--------+------+---------------+-----------+---------+-------+------+-------------+
+|  1 | SIMPLE      | orders | ref  | serial_id     | serial_id | 122     | const |    1 | Using where |
++----+-------------+--------+------+---------------+-----------+---------+-------+------+-------------+
+1 row in set (0.02 sec)
+</pre>
+
+
+<p>id 表示查找的顺序，如果有union还会为union专门分配一次查找。</p>
+<p>select_type 表示查找类型</p>
+<ul>
+<li>simple 不包含子查询和union的查询类型</li>
+<li>subquery 包含在select列表中的子查询中的select。(也就是说不在from子句中)。</li>
+<li>derived 与上面的相反，包含在from子句中的select语句。</li>
+<li>union 在union中的第二个和随后的select被标记为union。</li>
+<li>union result 用来从union的匿名临时表检索结果的select。</li>
+</ul>
+<p>subquery还可以被标记为dependent(子查询依赖与外部查询)和uncacheable(使用了rand()函数无法缓存)。</p>
+<p>table 表示被查找的表。mysql是按照左侧深度优先来查找数据的。如果from子句中有子查询或有union时，会产生派生表。</p>
+<p>type 表示关联类型。</p>
+<ul>
+<li>all 表示全表扫描</li>
+<li>index 类似于全表扫描，只不过扫描的时候时按照索引的顺序进行的。主要的优点是避免了排序，最大的缺点是每次检索都是随机检索。</li>
+<li>range 表示范围查找。mysq会把in和or也归类为范围查找，不过in和or会比普通的范围查找性能快很多。</li>
+<li>ref 索引访问。只有使用非唯一索引或者唯一性索引的非唯一性前缀的时候才会发生。</li>
+<li>eq_ref 使用这种索引的时候，mysql知道最多只返回一条符合条件的记录。</li>
+<li>const, system 常量查找</li>
+</ul>
+<p>possible_keys 表示可以使用的索引。</p>
+<p>key 表示实际使用的索引。</p>
+<p>key_len 索引里使用的字节数。</p>
+<p>ref 表示之前的表在key列记录的索引中查找所用的列或常量。</p>
+<p>rows 表示查找所需要读取的行数。</p>
+<p>extra 额外信息</p>
+<ul>
+<li>using index 表示使用了覆盖索引</li>
+<li>using where 表示mysql服务器将在存储引擎检索后再进行过滤。</li>
+<li>using temporary 表示使用了临时表</li>
+<li>using filesort 表示使用了文件排序</li>
+<li>range checked for each record (index map: N) 不知道是什么意思。</li>
+</ul>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Mysql/" rel="tag"># Mysql</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2015/04/09/与coroutine的意外邂逅/" rel="next" title="与coroutine的意外邂逅">
+                <i class="fa fa-chevron-left"></i> 与coroutine的意外邂逅
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/03/12/关于值与引用/" rel="prev" title="关于值与引用">
+                关于值与引用 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -458,6 +466,10 @@
 
 
           
+  <div class="comments" id="comments">
+    
+  </div>
+
 
         </div>
         
@@ -654,11 +666,9 @@
   
 
   
-  
-    <script type="text/javascript" id="motion.page.archive">
-      $('.archive-year').velocity('transition.slideLeftIn');
-    </script>
-  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
 
 
   

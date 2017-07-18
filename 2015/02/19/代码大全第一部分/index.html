@@ -1,0 +1,724 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="代码大全," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
+
+
+
+
+
+
+<meta name="description" content="昨天和今天看了《代码大全》的第一部分，打好基础。第一部分讲了一个软件构建前的一些东西。之前一直没有做过很大的项目，现在代码写多了也就慢慢地有感觉了，知道了架构是干什么用的。 第一部分没有很详细地教你如何做架构，而是讲了一个软件构建地整个过程，从定义问题确定需求到架构设计，到详细设计，到编码，到单元测试，到继承，到集成测试和系统测试。这中间有很多时间上是有重叠地。之前我写程序都没有做架构设计，所以写">
+<meta name="keywords" content="代码大全">
+<meta property="og:type" content="article">
+<meta property="og:title" content="代码大全第一部分：打好基础">
+<meta property="og:url" content="http://mreleven.com/2015/02/19/代码大全第一部分/index.html">
+<meta property="og:site_name" content="Eleven&#39;s blog">
+<meta property="og:description" content="昨天和今天看了《代码大全》的第一部分，打好基础。第一部分讲了一个软件构建前的一些东西。之前一直没有做过很大的项目，现在代码写多了也就慢慢地有感觉了，知道了架构是干什么用的。 第一部分没有很详细地教你如何做架构，而是讲了一个软件构建地整个过程，从定义问题确定需求到架构设计，到详细设计，到编码，到单元测试，到继承，到集成测试和系统测试。这中间有很多时间上是有重叠地。之前我写程序都没有做架构设计，所以写">
+<meta property="og:updated_time" content="2017-07-18T14:08:10.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="代码大全第一部分：打好基础">
+<meta name="twitter:description" content="昨天和今天看了《代码大全》的第一部分，打好基础。第一部分讲了一个软件构建前的一些东西。之前一直没有做过很大的项目，现在代码写多了也就慢慢地有感觉了，知道了架构是干什么用的。 第一部分没有很详细地教你如何做架构，而是讲了一个软件构建地整个过程，从定义问题确定需求到架构设计，到详细设计，到编码，到单元测试，到继承，到集成测试和系统测试。这中间有很多时间上是有重叠地。之前我写程序都没有做架构设计，所以写">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://mreleven.com/2015/02/19/代码大全第一部分/"/>
+
+
+
+
+
+  <title>代码大全第一部分：打好基础 | Eleven's blog</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Eleven's blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://mreleven.com/2015/02/19/代码大全第一部分/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Mr.Eleven">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://avatars1.githubusercontent.com/u/6140047?v=4&s=460">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Eleven's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">代码大全第一部分：打好基础</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2015-02-19T00:00:00+08:00">
+                2015-02-19
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/代码大全/" itemprop="url" rel="index">
+                    <span itemprop="name">代码大全</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>昨天和今天看了《代码大全》的第一部分，打好基础。第一部分讲了一个软件构建前的一些东西。之前一直没有做过很大的项目，现在代码写多了也就慢慢地有感觉了，知道了架构是干什么用的。</p>
+<p>第一部分没有很详细地教你如何做架构，而是讲了一个软件构建地整个过程，从定义问题确定需求到架构设计，到详细设计，到编码，到单元测试，到继承，到集成测试和系统测试。这中间有很多时间上是有重叠地。之前我写程序都没有做架构设计，所以写地时候很多地方是都不清晰的，而且有时候修改起来也比较麻烦，更重要的是修改过了，对系统的掌控力也就差了。</p>
+<p>《人月神话》中将软件开发比作是写作，但本书的作者将这种隐喻推翻，认为软件开发更像是造房子。前期良好的架构是节省成本的最佳方法，因为移动一片造好的墙和在设计的时候修改墙的设计的成本差好多。隐喻是一种很好的认事物的方法。</p>
+<p>架构师是一个牛逼的职业，要开发一个软件首先要明确需求，对需求要有一个良好的问题定义。然后是确定软件的类型。问题定义只是定义了“问题式什么”，而不能以技术的角度涉及任何解决方案相关的内容。书中列举了3中常见的软件类型，每种类型的软件都有适合自己的开发方法。另外还介绍了两种开发方法的优缺点（迭代式开发方法和序列式开发方法，虽然我不是很理解）。</p>
+<p>确定需求和架构的时间一般占工程时间的20～30%，另外书中列举了一系列标准：确定一个良好的架构的标准，和确定一份良好的需求的标准。以后可以当作自己写软件的标准。</p>
+<p>另外书上还讲了一些有意思的东西，其实在软件工程发展的早起，程序员也式很惨的。因为那个时候各种不稳定，编译器会出bug,操作系统会出bug，而且版本更新十分频繁，向前兼容性也做得很差，文档少。但是作者提到了一个牛逼的地方就是：深入一门语言编程而不是只用一门语言编程，编程的思想可以跨越语言的限制，就比如作者举的那个用vb写窗体程序的列子。</p>
+<p>架构的目的最重要的一点就是降低复杂度，在第二部分中作者提到了，软件工程其实是一个管理复杂度的过程。所以架构师的职责也包括了确定编码风格，因为一个统一的编码风格可以让程序员把更多的注意力转移到编写业务上。</p>
+<p>里面有几句有意思的话：</p>
+<h2 id="P7-把主要精力集中于构建活动，可以大大提高程序员的生产率。"><a href="#P7-把主要精力集中于构建活动，可以大大提高程序员的生产率。" class="headerlink" title="P7 把主要精力集中于构建活动，可以大大提高程序员的生产率。"></a>P7 把主要精力集中于构建活动，可以大大提高程序员的生产率。</h2><p>健康的生态环境中，海鸥吃新鲜的鲑鱼，鲑鱼吃新鲜的青鱼，青鱼吃新鲜的水蝽。这是一条健康的食物链。 如果环境被污染了，水蝽在污染的水域游泳，那么海鸥，食物链的最后一环吃下的不仅仅是是不健康的鲑鱼体内的垃圾，还有青鱼，水蝽体内的污染物。软件开发中，架构师吃掉需求，设计师吃掉架构，程序员，软件食物链的最后一环，消化掉设计。如果一开始就被污染了，我们就不要指望程序员快乐了。整个软件都会具有放射性，周身都是缺陷，绝对导致程序员脾气暴躁、营养失调。在我们规模不大的团队里，一个人身兼数职，伤害更大。所以，项目一开始就决定了它能否成功。</p>
+<h2 id="P24-避免使用错误的方法制造正确的产品"><a href="#P24-避免使用错误的方法制造正确的产品" class="headerlink" title="P24 避免使用错误的方法制造正确的产品"></a>P24 避免使用错误的方法制造正确的产品</h2><p>往往我们在软件开发中会很强调测试。的确、测试是质量的保证。但是测试只保证有质量的代码，却不保证有质量的设计。</p>
+<h2 id="P42-需求的-checklist"><a href="#P42-需求的-checklist" class="headerlink" title="P42 需求的 checklist"></a>P42 需求的 checklist</h2><p>是否详细定义了系统的全部输入，包括来源、精度、取值范围、出现频率。是否详细定义了系统全部输出，包括目的，精度，取值范围、出现频率，格式？是否定义了机器内存和剩余磁盘空间的最小值？是否详细定义了系统的可维护性，包括适应特定功能的变更、操作环境的变更、与其他软件的接口的变更能力？</p>
+<h2 id="P46-数据设计"><a href="#P46-数据设计" class="headerlink" title="P46 数据设计"></a>P46 数据设计</h2><p>我曾经很迷惑项目文档到底要写什么？这里列举的一些东西解开了我一些疑惑。如果你选择使用一个顺序访问的列表表示一组数据，就应该说明为什么顺序访问比随机访问更好。（往往随机访问更为高效）在构建期间，这些信息让你能洞察架构师的思想。在维护阶段，这种洞察力是无价之宝。 后面 P58 有个更为有趣的例子：Beth 想做丈夫 Adbul 家祖传的炖肉。Adbul 说，先撒上胡椒和盐，然后去头去尾，最后放在锅里盖上盖子炖就好了。Beth 就问了，“为什么要去头去尾呢？” Abdul 回答说，我不知道，我一直这么做，这要问我妈。他打电话回家一问，母亲也说不知道，她一直这么做，这个问题要问奶奶。母亲就打了个电话给奶奶，奶奶回答说，“我不知道你为什么要去头去尾，我这么做是因为我的锅太小了装不下”:D 架构应该描述所有主要决策的动机。</p>
+<h2 id="P51-过度工程"><a href="#P51-过度工程" class="headerlink" title="P51 过度工程"></a>P51 过度工程</h2><p>这个问题把握好并不容易。一方面，我们希望系统健壮，如果组成系统的各个部分只在最低限度满足健壮性要求，那么整体通常是达不到要求的。软件健壮性不取决于最薄弱的一环，而是等于所有薄弱环节的乘积。构架应该指出每个部分，程序员为了谨慎而宁可做过度工程，还是做出简单的能工作的东西就够了。有些东西是不应该过分花精力的，这个错误我们也犯过，尤其一些一开始就知道以后很可能要重构的部分，大量的精力花在里面很浪费。</p>
+<h2 id="P62-选择编程语言"><a href="#P62-选择编程语言" class="headerlink" title="P62 选择编程语言"></a>P62 选择编程语言</h2><p>我曾经也觉得 C++ 是万能的，这种想法很多 C++ 程序员也有。但是无可否认，每种语言的表达力是不同的。书在这页有一张表，如果 C 的表达能力是 1 的话，C++ 和 Java 就是 2.5 。而 perl 和 python 却有 6 。这就是我们选择游戏逻辑脚本编写的原因之一。另外对语言的熟悉程度是很影响程序员的效率的，所以我们不能独立的看语言本身的表达能力。P63 有个例子，用一群 Fortran 背景的程序员去用 C++ 编写一个新系统，结果他们编写出的是伪装成 C++ 的 Fortran 代码。他们扭曲 C++ 来模拟 Fortran 的不良特性并且忽略了 C++ 丰富的面向对象能力。我们这里有个现成的例子，一个 C++ 程序员用 C++/C 的方式写 Lua ，结果可想而知。到现在我还在叮嘱他，一定要理解，再理解 Lua 。lua 不是 C 。</p>
+<h2 id="P68-Programming-into-a-Language"><a href="#P68-Programming-into-a-Language" class="headerlink" title="P68 Programming into a Language"></a>P68 Programming into a Language</h2><p>注意，这里是 into 而不是 in 。书这里用了一个 vb 的例子来说明，恰好我也有个例子。我们现在用 C++ 构建系统，C++ 里有个相当麻烦的东西，就是单件的生存期问题。一个 singleton 到底什么时候创建出来，什么是否析构，相信很多 C++ 程序员在构建大系统的时候都头痛过。据我所知，我们公司别的项目的同事到现在还在头痛这个问题。这次我做了一个约定，禁止任何模块的代码构造静态对象，也就是说，任何在 main 函数前自动的对象构造过程和 main 函数之后的自动析构过程都是不允许的。然后我们有一整套管理单件的方法供使用，这个问题被很好的解决了。我们再也没有为某个单件什么时候构造出来的，或是为什么他提前析构了的问题烦恼过。</p>
+<h2 id="P78-管理复杂度的重要性"><a href="#P78-管理复杂度的重要性" class="headerlink" title="P78 管理复杂度的重要性"></a>P78 管理复杂度的重要性</h2><p>我们做软件，就是在和问题的复杂度做斗争。有三个问题需要注意：用复杂的方法解决简单的问题；用简单但错误的方法解决复杂的问题；用不恰当的复杂方法解决复杂的问题。</p>
+<h2 id="P80-high-fan-in-和-high-fan-out"><a href="#P80-high-fan-in-和-high-fan-out" class="headerlink" title="P80 high fan-in 和 high fan-out"></a>P80 high fan-in 和 high fan-out</h2><p>高内聚，低耦合很容易被重视。但是高扇入低扇出有时候会被忽略。这里是说，我们应该尽量的大量的使用某个低层次上给定的类(high fan-in) 而每个类都应该尽量少使用其他的类(控制在7个之下)。（貌似这也是我一直在思考的问题。之前一直以为是面向对象中类的爆炸）</p>
+<p>另外附上云风大神的笔记：<a href="http://blog.codingnow.com/cloud/CodeComplete" target="_blank" rel="external">http://blog.codingnow.com/cloud/CodeComplete</a></p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/代码大全/" rel="tag"># 代码大全</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2015/02/10/网络编程的一些东西/" rel="next" title="网络编程的一些基础">
+                <i class="fa fa-chevron-left"></i> 网络编程的一些基础
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2015/03/21/InnoDB多版本并发控制的实现/" rel="prev" title="InnoDB中多版本并发控制的实现">
+                InnoDB中多版本并发控制的实现 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="https://avatars1.githubusercontent.com/u/6140047?v=4&s=460"
+               alt="Mr.Eleven" />
+          <p class="site-author-name" itemprop="name">Mr.Eleven</p>
+           
+              <p class="site-description motion-element" itemprop="description">蚂蚁没见过大海，不代表沧海不存在！</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">31</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              
+                <span class="site-state-item-count">17</span>
+                <span class="site-state-item-name">分类</span>
+              
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              
+                <span class="site-state-item-count">18</span>
+                <span class="site-state-item-name">标签</span>
+              
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#P7-把主要精力集中于构建活动，可以大大提高程序员的生产率。"><span class="nav-number">1.</span> <span class="nav-text">P7 把主要精力集中于构建活动，可以大大提高程序员的生产率。</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#P24-避免使用错误的方法制造正确的产品"><span class="nav-number">2.</span> <span class="nav-text">P24 避免使用错误的方法制造正确的产品</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#P42-需求的-checklist"><span class="nav-number">3.</span> <span class="nav-text">P42 需求的 checklist</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#P46-数据设计"><span class="nav-number">4.</span> <span class="nav-text">P46 数据设计</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#P51-过度工程"><span class="nav-number">5.</span> <span class="nav-text">P51 过度工程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#P62-选择编程语言"><span class="nav-number">6.</span> <span class="nav-text">P62 选择编程语言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#P68-Programming-into-a-Language"><span class="nav-number">7.</span> <span class="nav-text">P68 Programming into a Language</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#P78-管理复杂度的重要性"><span class="nav-number">8.</span> <span class="nav-text">P78 管理复杂度的重要性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#P80-high-fan-in-和-high-fan-out"><span class="nav-number">9.</span> <span class="nav-text">P80 high fan-in 和 high fan-out</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Mr.Eleven</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Muse
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

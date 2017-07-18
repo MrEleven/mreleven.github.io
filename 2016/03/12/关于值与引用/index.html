@@ -77,7 +77,7 @@
 <link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="Java," />
 
 
 
@@ -93,15 +93,17 @@
 
 
 
-<meta name="description" content="蚂蚁没见过大海，不代表沧海不存在！">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Eleven&#39;s blog">
-<meta property="og:url" content="http://mreleven.com/archives/2017/07/index.html">
+<meta name="description" content="自从到了新公司，就开始了苦逼的java学习。新公司忙成🐶，每天基本上都是10点左右才离开公司。 今天感冒请假在家，想到自己已经很长时间没有学习了。不学习就不会成长，毕竟大杭州90%公司的核心开发语言都是Java，于是在知乎上找各位大牛的Java学习路线，发现了之前有个一直不适很清楚的概念，Java中的值传递和引用传递。  关于值类型和引用类型。值类型是java中所有的基本类型，而引用类型是指对象">
+<meta name="keywords" content="Java">
+<meta property="og:type" content="article">
+<meta property="og:title" content="关于值与引用">
+<meta property="og:url" content="http://mreleven.com/2016/03/12/关于值与引用/index.html">
 <meta property="og:site_name" content="Eleven&#39;s blog">
-<meta property="og:description" content="蚂蚁没见过大海，不代表沧海不存在！">
+<meta property="og:description" content="自从到了新公司，就开始了苦逼的java学习。新公司忙成🐶，每天基本上都是10点左右才离开公司。 今天感冒请假在家，想到自己已经很长时间没有学习了。不学习就不会成长，毕竟大杭州90%公司的核心开发语言都是Java，于是在知乎上找各位大牛的Java学习路线，发现了之前有个一直不适很清楚的概念，Java中的值传递和引用传递。  关于值类型和引用类型。值类型是java中所有的基本类型，而引用类型是指对象">
+<meta property="og:updated_time" content="2017-07-18T14:08:10.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Eleven&#39;s blog">
-<meta name="twitter:description" content="蚂蚁没见过大海，不代表沧海不存在！">
+<meta name="twitter:title" content="关于值与引用">
+<meta name="twitter:description" content="自从到了新公司，就开始了苦逼的java学习。新公司忙成🐶，每天基本上都是10点左右才离开公司。 今天感冒请假在家，想到自己已经很长时间没有学习了。不学习就不会成长，毕竟大杭州90%公司的核心开发语言都是Java，于是在知乎上找各位大牛的Java学习路线，发现了之前有个一直不适很清楚的概念，Java中的值传递和引用传递。  关于值类型和引用类型。值类型是java中所有的基本类型，而引用类型是指对象">
 
 
 
@@ -129,13 +131,13 @@
 
 
 
-  <link rel="canonical" href="http://mreleven.com/archives/2017/07/"/>
+  <link rel="canonical" href="http://mreleven.com/2016/03/12/关于值与引用/"/>
 
 
 
 
 
-  <title>归档 | Eleven's blog</title>
+  <title>关于值与引用 | Eleven's blog</title>
   
 
 
@@ -160,7 +162,7 @@
     
   
 
-  <div class="container sidebar-position-left  page-archive  ">
+  <div class="container sidebar-position-left page-post-detail ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -244,65 +246,182 @@
           <div id="content" class="content">
             
 
-  <section id="posts" class="posts-collapse">
-    <span class="archive-move-on"></span>
+  <div id="posts" class="posts-expand">
+    
 
-    <span class="archive-page-counter">
-      
-      
-       
-      
-      OK! 目前共计 31 篇日志。 继续努力。
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://mreleven.com/2016/03/12/关于值与引用/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Mr.Eleven">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://avatars1.githubusercontent.com/u/6140047?v=4&s=460">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Eleven's blog">
     </span>
 
     
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">关于值与引用</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-03-12T00:00:00+08:00">
+                2016-03-12
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/java/" itemprop="url" rel="index">
+                    <span itemprop="name">java</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
 
       
       
-      
 
+      
+        <p>自从到了新公司，就开始了苦逼的java学习。新公司忙成🐶，每天基本上都是10点左右才离开公司。</p>
+<p>今天感冒请假在家，想到自己已经很长时间没有学习了。不学习就不会成长，毕竟大杭州90%公司的核心开发语言都是Java，于是在知乎上找各位大牛的Java学习路线，发现了之前有个一直不适很清楚的概念，Java中的值传递和引用传递。</p>
+<ul>
+<li>关于值类型和引用类型。值类型是java中所有的基本类型，而引用类型是指对象类型。(Integer和Long这种包装器也是引用类型，只是他们在某些情况下编译器中会转化成它包装的基本类型)。用来区分引用类型和值类型只有一个标准，它的内存分配是在堆上还是在栈上。</li>
+<li>mutate和change，mutate表示堆上内存的改变，change表示变量名重新指到一个新的内存地址，原本指向的内容不变。</li>
+<li>值传递与引用传递。函数调用参数传递本身都是值的传递，值类型传递一份本身的拷贝，引用类型传递一份引用的地址拷贝。由于函数调用会创建新的栈帧，所以形参的作用域只是函数内部，对形参变量名的赋值不会对函数之外产生影响，所以我们永远也无法在函数内改变函数外的实参的引用地址。所以我们只能对实参进行mutate操作，不能进行change操作。</li>
+</ul>
+<p>不扯淡，睡觉了。<a href="https://www.zhihu.com/question/20628016" target="_blank" rel="external">知乎原文地址</a></p>
+<p>明天回来看闭包。 <a href="https://www.zhihu.com/question/27460623/answer/36747015" target="_blank" rel="external">first class function</a></p>
+
+      
+    </div>
+
+    <div>
       
         
-        <div class="collection-title">
-          <h2 class="archive-year motion-element" id="archive-year-2017">2017</h2>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Java/" rel="tag"># Java</a>
+          
         </div>
       
+
+      
+      
       
 
       
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2015/07/19/Explain命令/" rel="next" title="Mysql Explain命令整理">
+                <i class="fa fa-chevron-left"></i> Mysql Explain命令整理
+              </a>
+            
+          </div>
 
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+          <span class="post-nav-divider"></span>
 
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2017/07/15/hello-world/" itemprop="url">
-              
-                <span itemprop="name">抛弃Jekyll，转移到Hexo</span>
-              
-            </a>
-        
-      </h2>
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/03/16/scheme/" rel="prev" title="scheme牛顿迭代">
+                scheme牛顿迭代 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2017-07-15T00:00:00+08:00"
-              content="2017-07-15" >
-          07-15
-        </time>
-      </div>
-
-    </header>
+      
+      
+    </footer>
   </article>
 
 
 
-    
-
-  </section>
-
-  
-
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -310,6 +429,10 @@
 
 
           
+  <div class="comments" id="comments">
+    
+  </div>
+
 
         </div>
         
@@ -506,11 +629,9 @@
   
 
   
-  
-    <script type="text/javascript" id="motion.page.archive">
-      $('.archive-year').velocity('transition.slideLeftIn');
-    </script>
-  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
 
 
   

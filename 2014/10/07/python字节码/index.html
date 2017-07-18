@@ -1,0 +1,960 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Python," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
+
+
+
+
+
+
+<meta name="description" content="绝对清晰，是风格上唯一的美。既然是美的东西，我们总是要追求的，如果不熟悉Python虚拟机中执行的字节码，那么又怎么能被称作是绝对清晰呢？ 首先是最简单的简单内建对象的创建。看下面四句语句。  [simple_obj.py] i = 1 s = &quot;Python&quot; d = {} l = []  这个文件被编译后的对应的PyCodeObject对象的co_names和co_consts的xml结构如下">
+<meta name="keywords" content="Python">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Python字节码">
+<meta property="og:url" content="http://mreleven.com/2014/10/07/python字节码/index.html">
+<meta property="og:site_name" content="Eleven&#39;s blog">
+<meta property="og:description" content="绝对清晰，是风格上唯一的美。既然是美的东西，我们总是要追求的，如果不熟悉Python虚拟机中执行的字节码，那么又怎么能被称作是绝对清晰呢？ 首先是最简单的简单内建对象的创建。看下面四句语句。  [simple_obj.py] i = 1 s = &quot;Python&quot; d = {} l = []  这个文件被编译后的对应的PyCodeObject对象的co_names和co_consts的xml结构如下">
+<meta property="og:updated_time" content="2017-07-18T14:08:10.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Python字节码">
+<meta name="twitter:description" content="绝对清晰，是风格上唯一的美。既然是美的东西，我们总是要追求的，如果不熟悉Python虚拟机中执行的字节码，那么又怎么能被称作是绝对清晰呢？ 首先是最简单的简单内建对象的创建。看下面四句语句。  [simple_obj.py] i = 1 s = &quot;Python&quot; d = {} l = []  这个文件被编译后的对应的PyCodeObject对象的co_names和co_consts的xml结构如下">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://mreleven.com/2014/10/07/python字节码/"/>
+
+
+
+
+
+  <title>Python字节码 | Eleven's blog</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Eleven's blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://mreleven.com/2014/10/07/python字节码/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Mr.Eleven">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://avatars1.githubusercontent.com/u/6140047?v=4&s=460">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Eleven's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Python字节码</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2014-10-07T00:00:00+08:00">
+                2014-10-07
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Python源码剖析/" itemprop="url" rel="index">
+                    <span itemprop="name">Python源码剖析</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>绝对清晰，是风格上唯一的美。既然是美的东西，我们总是要追求的，如果不熟悉Python虚拟机中执行的字节码，那么又怎么能被称作是绝对清晰呢？</p>
+<p>首先是最简单的简单内建对象的创建。看下面四句语句。</p>
+<pre>
+[simple_obj.py]
+i = 1
+s = "Python"
+d = {}
+l = []
+</pre>
+这个文件被编译后的对应的PyCodeObject对象的co_names和co_consts的xml结构如下
+<pre>
+&lt;consts&gt;
+    &lt;int value="1" /&gt;
+    &lt;internStr index="0" length="6" value="Python" /&gt;
+    &lt;NoneObject /&gt;
+&lt;/consts&gt;
+&lt;names&gt;
+    &lt;internStr index="1" length="1" value="i" /&gt;
+    &lt;internStr index="2" length="1" value="s" /&gt;
+    &lt;internStr index="3" length="1" value="d" /&gt;
+    &lt;internStr index="4" length="1" value="l" /&gt;
+&lt;/names&gt;
+</pre>
+co_names存放了这段代码的所有局部变量名，co_consts存放了这段代码中的所有静态变量
+
+Python解释器执行字节码的入口函数就是PyEval_EvalFrameEx()。这个函数中定义了大量的宏
+<pre>
+GETITEM(v, i)   // 从tuple中获取元素
+STACKADJ(n)     // 调整栈顶指针的位置
+PUSH(v)         // 入栈
+POP()           // 出栈
+</pre>
+
+<pre>
+i = 1 对应的字节码如下
+0 LOAD_CONST    0   (1)     // 加载偏移量为0的常量
+3 STORE_NAME    0   (i)     // 将加载的值与偏移量为0的变量名形成约束，并存入local命名空间。
+
+s = "Python" 对应的字节码如下
+6 LOAD_CONST    1   ("Python")
+9 STORE_NAME    1   (s)
+
+d = {} 对应的字节码如下
+12 BUILD_MAP    0
+15 STORE_NAME   2   (d)
+
+l = []
+18 BUILD_LIST   0
+21 STORE_NAME   3   (l)
+24 LOAD_CONST   2   (none)  // 24和27的语句表示python执行完一段codeblock后必须有返回值，默认返回None。
+27 RETURN_VALUE
+
+而LOAD_CONST的实现可以当作下面的语句
+x = GETITEM(consts, oparg); // 从consts中获取对应偏移量的元素值
+Py_INCREF(x);               // 增加x变量的引用计数
+PUSH(x);                    // 入栈
+
+BUILD_MAP的实现如下
+x = PyDict_New();
+PUSH(x);
+
+RETURN_VALUE的实现如下
+retval = POP();
+why = WHY_RETURN;       // why在Python虚拟机的消息循环中作一个标志，异常机制就是用它实现的
+</pre>
+
+<pre>
+[adv_obj.py]
+i = 1
+s = "Python"
+d = {"1": 1, "2": 2}
+l = [1, 2]
+
+adv_obj.py对应的PyCodeObject的names和consts的xml结构如下
+&lt;consts&gt;
+    &lt;int value="1" /&gt;
+    &lt;internStr index="0" length="6" value="Python" /&gt;
+    &lt;internStr index="1" length="1" value="1" /&gt;
+    &lt;int value="2" /&gt;
+    &lt;internStr index="2" length="1" value="2" /&gt;
+    &lt;NoneObject /&gt;
+&lt;/consts&gt;
+&lt;names&gt;
+    &lt;internStr index="3" length="1" value="i" /&gt;
+    &lt;internStr index="4" length="1" value="s" /&gt;
+    &lt;internStr index="5" length="1" value="d" /&gt;
+    &lt;internStr index="6" length="1" value="l" /&gt;
+&lt;/names&gt;
+这里consts中只有一个&lt;int value="1"&gt;是因为Python对整数的处理也有一套类似雨字符串的internal机制。
+
+d = {"1": 1}
+12 BUILD_MAP    0
+15 DUP_TOP                  // 增加了map的引用计数，将map再一次压入栈中
+16 LOAD_CONST   0   (1)
+19 ROT_TWO                  // 将栈顶元素和第二个元素交换位置
+20 LOAD_CONST   2   ("1")
+23 STORE_SUBSCR             // 将("1": 1)这个item插入到上面的map中，并将栈顶指针上移三个
+24 DUP_TOP
+25 LOAD_CONST   3   (2)
+28 ROT_TWO
+29 LOAD_CONST   4   ("2")
+32 STORE_SUBSCR
+33 STORE_NAME   2   (d)     // 将上面的map与偏移量为2的变量名(d)生成约束，存入local空间中
+
+[DUP_TOP]       // 注意 DUP_TOP不仅仅增加了栈顶元素的引用计数，还将栈顶元素再一次压入栈中
+v = TOP();
+Py_INCREF(v);
+PUSH(v);
+
+[ROT_TWO]
+v = TOP()
+w = SECOND();
+SET_TOP(w);
+SET_SECOND(v);
+
+[STORE_SUBSCR]
+w = TOP();
+v = SECOND();
+u = THIRD();
+STACKADJ(-3);
+PyObject_SetItem(v, w, u);
+Py_DECREF(u);
+Py_DECREF(v);
+Py_DECREF(w);
+
+l = [1, 2]
+36 LOAD_CONST   0   (1)
+39 LOAD_CONST   3   (2)
+42 BUILD_LIST   2           // 创建list，并将前两个元素填入list。
+45 STORE_NAME   3   (1)
+
+list的创建比较有意思，他会先把list中的元素压入运行时栈，然后通过BUILD_LIST传贱list对象，并把前面的对象(参数为元素的数量)填入list中。
+</pre>
+
+<pre>
+[normal.py]
+a = 5
+b = a
+c = a + b
+print c
+
+&lt;consts&gt;
+    &lt;int value="5" /&gt;
+    &lt;NoneObject /&gt;
+&lt;/consts&gt;
+&lt;names&gt;
+    &lt;internStr index="0" length="1" value="a" /&gt;
+    &lt;internStr index="1" length="1" value="b" /&gt;
+    &lt;internStr index="2" length="1" value="c" /&gt;
+&lt;/names&gt;
+
+b = a
+0 LOAD_NAME     0   (a)     // 会按顺序从local, globals, builtin三个命名空间中去寻找a
+3 STORE_NAME    1   (b)
+
+c = a + b
+12 LOAD_NAME    0   (a)
+15 LOAD_NAME    1   (b)
+18 BINARY_ADD               // 这条指令，表示将上面两个数相加，这里又涉及到加法的快速通道(int和str专用)和慢速通道
+19 STORE_NAME   2   (c)
+
+print c
+22 LOAD_NAME    2   (c)
+25 PRINT_ITEM  
+26 PRINT_NEWLINE
+
+[PRINT_ITEM_TO]     // 这条语句主要是用于输出重定向
+w = stream = POP();
+</pre>
+
+<pre>
+[if_control.py]
+a = 1
+if a > 10:
+    print "a > 10"
+elif a <= -2:="" print="" "a="" <="-2"" elif="" a="" !="1:" 1:="" 1"="" else:="" "unknown="" a"="" if=""> 10:
+6 LOAD_NAME     0   (a)
+9 LOAD_CONST    1   (10)
+12  COMPARE_OP  4   (>)         // 这个字节码为int对象实现了快速通道
+15  JUMP_IF_FALSE   9   (to 27)
+18  POP_TOP
+    print "a > -1"
+19  LOAD_CONST  2   ("a>-1")
+22  PRINT_ITEM
+23  PRINT_NEWLINE
+24  JUMP_FORWARD    72  (to 99)
+27  POP_TOP
+elif a <= 0="" 1="" 3="" 9="" 28="" 31="" 34="" 37="" 40="" -2:="" load_name="" (a)="" load_const="" (-1)="" compare_op="" (<=")" jump_if_false="" (to="" 49)="" pop_top="" 其实大部分判断语句的结构都是相同的="" -="">  LOAD_CONST  ->  COMPARE_OP  ->  JUMP_*
+从local命名空间中获得变量名a所对应的值，从常量表consts中读取参与该分支判断操作的常量对象，进行比较获取得结果true/false，根据结果进行指令跳转。
+python中的判断语句除了比较语句，还包括了is, in, not in, is not,(还有一个叫PyCmp_EXC_MATCH的东西，好像是和异常处理有关。。。)
+
+list = [1, 2, 3, 4]
+if l in list:
+LOAD_CONST      0   (1)
+LOAD_NAME       0   (list)
+COMPARE_OP      6   (in)
+JUMP_IF_FALSE
+POP_TOP         // 将比较结果移出栈顶
+
+python的比较结果只有两个Py_False和Py_True，底层的实现其实就是0和1。
+在Python中，有一些字节码通常都是成对顺序出现的，所以python中还有一个指令预测功能，预测功能通常会用到下面几个宏。
+PREDICT(op)
+PREDICTED(op)
+PREDICTED_WITH_ARG(op)
+PEEKARG()
+
+比如PREDICT(JUMP_IF_FALSE)的意思就是检查下一条待处理的字节码是否是JUMP_IF_FALSE。如果是，则程序的流程会跳转到PRED_JUMP_IF_FALSE标志符对应的代码处。
+这主要是通过goto语句实现的，也就是说，如果下一句语句是JUMP_IF_FALSE的话，JUMP_IF_FALSE这句字节码就不用再次顺序地进入Python虚拟机的消息循环了，直接通过goto语句跳到case JUMP_IF_FALSE:这个地方，并将指向下一条语句的指针向后移一位。相当于以更快速的方式执行了JUMP_IF_FALSE。
+
+将COMPARE_OP中实现的PREDICT宏展开如下：
+[COMPARE_OP]
+...
+if(*next_instr == JUMP_IF_FALSE)
+    goto PRED_JUMP_IF_FALSE;
+if(*next_instr == JUMP_IF_TRUE)
+    goto PRED_JUMP_IF_TRUE;
+
+JUMPBY(x)   表示下一条字节码的指针移动x个字节。
+
+[for_control.py]
+lst = [1, 2]
+0   LOAD_CONST  0   (1)
+3   LOAD_CONST  1   (2)
+6   BUILD_LIST  2
+9   STORE_NAME  0   (lst)
+for i in lst:
+12  SETUP_LOOP  19  (to 34)
+15  LOAD_NAME   0   (lst)
+18  GET_ITER                    // 获取迭代器
+19  FOR_ITER    11  (to 33)
+22  STORE_NAME  1   (i)
+    print i
+25  LOAD_NAME   1   (i)
+28  PRINT_ITEM
+29  PRINT_NEWLINE   
+30  JUMP_ABSOLUTE   19          // 跳转到绝对地址19
+33  POP_BLOCK                   // 跳出PyTryBlock，相当于是将PyFrameObject中的f_blockstack数组的当前index向前移动一个，这样简单的方式不对称但是很简单。
+34  LOAD_CONST  2   (None)
+37  RETURN_VALUE
+
+之前我们谈到过PyFrameObject对象中有一个成员变量叫f_blockstack。
+typedef struct _frame   {
+    ...
+    int f_iblock;
+    PyTryBlock  f_blockstack[CO_MAXBLOCKS];
+    ...
+} PyFrameObject;
+
+typedef struct {
+    int b_type;     // block类型
+    int b_handler;  // where to jump to find handler
+    int b_level;    // value stack level to pop to
+} PyTryBlock;
+剧透一下PyTryBlock一般用于异常处理和循环O(^_^)O
+
+1/0
+#   LOAD_CONST  0
+#   LOAD_CONST  1
+#   BINARY_DIVIDE
+
+BINARY_DIVIDE其实是调用了一个叫PyNumber_Divide(v, w)；的一个函数，如果这个函数返回NULL，表示有异常产生，异常是通过PyErr_SetString(PyExc_ZeroDivisionError, "integer division or modulo by zero")产生。PyExc_ZeroDivisionError这其实是一个PyObject(好吧，这是废话)，在Python环境初始化的时候就会被创建。
+异常信息会被记录到线程状态对象PyThreadState中。当有异常发生的时候把Python消息循环的标志why设置为有异常发生。并且会沿着PyFrameObject传递，并且会沿反方向记录traceback。而try跟finally会创建两种PyTryBlock，在跳出blockstack后会进入except和finally的PyTryBlock。也就是说，try中的语句会在finnaly和exception的上层执行，退出后肯定会进入下面的PyTryBlock。
+另外还有一个有意思的地方就是Python消息循环的函数是递归调用的，一般一个PyCodeObject回对应一个消息循环的入口函数。
+</=></=></pre>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Python/" rel="tag"># Python</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2014/10/06/本杰明巴顿带给我的启示/" rel="next" title="本杰明巴顿带给我的启示">
+                <i class="fa fa-chevron-left"></i> 本杰明巴顿带给我的启示
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2014/10/07/python虚拟机整体框架/" rel="prev" title="Python虚拟机整体框架">
+                Python虚拟机整体框架 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <section class="site-overview sidebar-panel sidebar-panel-active">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="https://avatars1.githubusercontent.com/u/6140047?v=4&s=460"
+               alt="Mr.Eleven" />
+          <p class="site-author-name" itemprop="name">Mr.Eleven</p>
+           
+              <p class="site-description motion-element" itemprop="description">蚂蚁没见过大海，不代表沧海不存在！</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">31</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              
+                <span class="site-state-item-count">17</span>
+                <span class="site-state-item-name">分类</span>
+              
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              
+                <span class="site-state-item-count">18</span>
+                <span class="site-state-item-name">标签</span>
+              
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Mr.Eleven</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Muse
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
