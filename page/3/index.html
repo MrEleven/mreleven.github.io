@@ -256,6 +256,157 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://mreleven.com/2014/12/06/GDB一些常用的命令/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Mr.Eleven">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://mreleven.oss-cn-hangzhou.aliyuncs.com/blog/270356B2-2258-4753-AC46-0A4CEC06DF78.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Eleven's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2014/12/06/GDB一些常用的命令/" itemprop="url">GDB一些常用的命令</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2014-12-06T00:00:00+08:00">
+                2014-12-06
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/工具/" itemprop="url" rel="index">
+                    <span itemprop="name">工具</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>mac上装gdb还是比较麻烦的，好像homebrew上面很多东西被墙了，装东西很慢不过花了整整一个晚上的时间终于装好了。</p>
+<p>首先你想用gdb调试你写的C代码，那么在用Gcc编译的时候一定要把源代码信息也一切编译进去。</p>
+<p>gcc quick_sort.c -o a.out -g</p>
+<p>这里的-g就表示吧源代码信息一起编译进输出文件。</p>
+<p>启动gdb有两种方式。</p>
+<p>gdb命令后面直接接调试的可执行文件<br>gdb [options] [executable-file [core-file or process-id]]</p>
+<p>gdb a.out</p>
+<p>也可以直接打gdb命令启动gdb，然后在交互环境通过file + 目标文件这个命令来导入需要调试的可执行文件。</p>
+<p>l(list) 表示显示代码，l 23列出第23行前后5行代码(18-28行)。</p>
+<p>b(breakpoint) 表示设置断点，b main这个命令可以在main函数开始的地方设置断点。 也可以这样用b 12这个命令可以在12行设置一个断点。</p>
+<p>c(continue) 表示继续执行到下一个断点。</p>
+<p>n(next) 表示执行下一条语句，注意这里的下一条语句是不会进入被调用的函数内部的。</p>
+<p>s(step) 表示单步调试的下一步， 这里的下一步是会进入被调用的函数内部的。</p>
+<p>d(delete) 表示删除断点。 d 2表示删除编号为2的断点，断点的编号是递增的。</p>
+<p>r(run) 表示启动执行程序。可以在调试一半然后重新启动执行程序。</p>
+<p>p(print) 输出一个变量。p a输出a的值。</p>
+<p>clear 清除所有断点。</p>
+<p>基本上目前常用点的都在上面了。</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="http://mreleven.com/2014/12/06/集齐7种排序算法召唤神猿/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1339,189 +1490,6 @@ Python和C#一样，都是采用引用计数来实现垃圾回收机制的。不
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://mreleven.com/2014/10/07/python虚拟机整体框架/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Mr.Eleven">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="http://mreleven.oss-cn-hangzhou.aliyuncs.com/blog/270356B2-2258-4753-AC46-0A4CEC06DF78.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Eleven's blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2014/10/07/python虚拟机整体框架/" itemprop="url">Python虚拟机整体框架</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2014-10-07T00:00:00+08:00">
-                2014-10-07
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Python源码剖析/" itemprop="url" rel="index">
-                    <span itemprop="name">Python源码剖析</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>Python虚拟机的运行原理和exe文件在x86架构的CPU中执行的原理类似。都是通过栈帧的方式来执行的(其实就是一个栈指针在一个栈中移来移去，然后不停地出栈入栈，不停创建栈帧)，至于具体怎么运行的比较麻烦，我就不说的，自己看书去。简单来说栈帧和python中命名空间是对应的。一个栈帧对应一个命名空间，所以一个栈帧也对应一个PyCodeObject对象。在Python中栈帧的抽象叫做PyFrameObject。</p>
-<pre>
-[frameobject.h]
-typedef struct _frame {
-    PyObject_VAR_HEAD
-    struct _frame *f_back;     // 执行环境链上的前一个frame
-    PyCodeObject *f_code;      // PyCodeObject对象
-    PyObject *f_builtins;      // builtin命名空间
-    PyObject *f_globals;       // global命名空间
-    PyObject *f_locals;        // local命名空间
-    PyObject **f_valuestack;   // 运行时栈的栈底位置
-    PyObject **f_stacktop;     // 运行时栈的栈顶位置
-    ...
-    int f_lasti;       // 上一条字节码指令在f_code中的偏移位置
-    int f_lineno;      // 当前字节码对应的源代码行
-    PyObject *f_localsplus[1]; // 动态内存。(局部变量 + cell对象集合 + free对象集合 + 运行时栈)
-} PyFrameObject;
-</pre>
-
-<p>书本上说这里的f_code存放的是一个待执行的PyCodeObject对象，而不是当前正在执行的PyCodeObject，我表示有点小怀疑，待会我去验证一下。f_builtins, f_globals, f_locals分别对应了三个PyDictObject，维护了builtin, global, 三个命名空间中name，以及local命名空间中name和value之间的对应关系。因为每个PyCodeBlock所需要的栈空间大小都是不一样的，所以PyFrameObject是一个可变长的对象，而f_localsplus所指向的就是PyCodeBlock所需要的栈空间和其他一些内存。实际上，运行时栈空间是f_valuestack和f_stacktop之间的空间，其他的空间是用来存放闭包变量的。Python标准库中的sys模块提供了对PyFrameObject的访问，具体的函数是sys._getframe()。</p>
-<p>在Python中赋值语句会在local命名空间中创建约束(所谓的约束，就是变量名和变量名对应的值的对应关系)。赋值语句在Python中不单单指存在赋值符号的语句，还包括了def, class, import，for这样的语句。关于命名空间这个东西记住一点：Python中命名空间是静态的，而不是动态的。也就是说作用域仅仅由源程序的文本决定，而不是由运行时动态决定的(所以也叫词法作用域)。至于Python的LGB规则和LEGB规则我也不想多说了，只要按照最内嵌套作用域规则来推导就行了。关于Python的静态作用域，还有一个比较有意思的问题，之前我们老板面试我的时候问过我O(^_^)O</p>
-<pre>
-a = 1
-def g():
-    print a
-
-def f():
-    print a
-    a = 2
-    print a
-
-g()
-f()
-</pre>
-
-<p>当时我认为输出的结果是1 1 2。其实这段代码在运行f()第一个print a的时候就报错了，”local variable ‘a’ referenced before assignment”。简单的说，原因就是在编译成pyc文件的时候，f()中a的变量就已经确定是local变量了，所以在执行第一句print a的时候，发现a是未定义的，所以就报错了。通过dis查看编译生成的字节码就能看出两个print a的差异(g()中的print a和f()中的第一个print a的差异)。</p>
-<pre>
-g()中print a的字节码为
-# 0 LOAD_GLOBAL        0
-# 3 PRINT_ITEM
-# 4 PRINT_NEWLINE
-
-f()中第一句print a的字节码为
-# 0 LOAD_FAST          0
-# 3 PRINT_ITEM
-# 4 PRINT_NEWLINE
-</pre>
-
-<p>LOAD_GLOBAL的意思是从global空间中加载变量 而 LOAD_FAST是从local空间中加载变量。</p>
-<p>在Python中Python解释器充当了CPU的角色，Python解释器中可能运行了很多进程，每个进程中可能有很多线程，而线程下面又有很多栈帧。这样一想整个Python虚拟机的框架就出来了。O(^_^)O</p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="http://mreleven.com/2014/10/07/python字节码/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1934,6 +1902,189 @@ BINARY_DIVIDE其实是调用了一个叫PyNumber_Divide(v, w)；的一个函数�
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://mreleven.com/2014/10/07/python虚拟机整体框架/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Mr.Eleven">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://mreleven.oss-cn-hangzhou.aliyuncs.com/blog/270356B2-2258-4753-AC46-0A4CEC06DF78.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Eleven's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2014/10/07/python虚拟机整体框架/" itemprop="url">Python虚拟机整体框架</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2014-10-07T00:00:00+08:00">
+                2014-10-07
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Python源码剖析/" itemprop="url" rel="index">
+                    <span itemprop="name">Python源码剖析</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>Python虚拟机的运行原理和exe文件在x86架构的CPU中执行的原理类似。都是通过栈帧的方式来执行的(其实就是一个栈指针在一个栈中移来移去，然后不停地出栈入栈，不停创建栈帧)，至于具体怎么运行的比较麻烦，我就不说的，自己看书去。简单来说栈帧和python中命名空间是对应的。一个栈帧对应一个命名空间，所以一个栈帧也对应一个PyCodeObject对象。在Python中栈帧的抽象叫做PyFrameObject。</p>
+<pre>
+[frameobject.h]
+typedef struct _frame {
+    PyObject_VAR_HEAD
+    struct _frame *f_back;     // 执行环境链上的前一个frame
+    PyCodeObject *f_code;      // PyCodeObject对象
+    PyObject *f_builtins;      // builtin命名空间
+    PyObject *f_globals;       // global命名空间
+    PyObject *f_locals;        // local命名空间
+    PyObject **f_valuestack;   // 运行时栈的栈底位置
+    PyObject **f_stacktop;     // 运行时栈的栈顶位置
+    ...
+    int f_lasti;       // 上一条字节码指令在f_code中的偏移位置
+    int f_lineno;      // 当前字节码对应的源代码行
+    PyObject *f_localsplus[1]; // 动态内存。(局部变量 + cell对象集合 + free对象集合 + 运行时栈)
+} PyFrameObject;
+</pre>
+
+<p>书本上说这里的f_code存放的是一个待执行的PyCodeObject对象，而不是当前正在执行的PyCodeObject，我表示有点小怀疑，待会我去验证一下。f_builtins, f_globals, f_locals分别对应了三个PyDictObject，维护了builtin, global, 三个命名空间中name，以及local命名空间中name和value之间的对应关系。因为每个PyCodeBlock所需要的栈空间大小都是不一样的，所以PyFrameObject是一个可变长的对象，而f_localsplus所指向的就是PyCodeBlock所需要的栈空间和其他一些内存。实际上，运行时栈空间是f_valuestack和f_stacktop之间的空间，其他的空间是用来存放闭包变量的。Python标准库中的sys模块提供了对PyFrameObject的访问，具体的函数是sys._getframe()。</p>
+<p>在Python中赋值语句会在local命名空间中创建约束(所谓的约束，就是变量名和变量名对应的值的对应关系)。赋值语句在Python中不单单指存在赋值符号的语句，还包括了def, class, import，for这样的语句。关于命名空间这个东西记住一点：Python中命名空间是静态的，而不是动态的。也就是说作用域仅仅由源程序的文本决定，而不是由运行时动态决定的(所以也叫词法作用域)。至于Python的LGB规则和LEGB规则我也不想多说了，只要按照最内嵌套作用域规则来推导就行了。关于Python的静态作用域，还有一个比较有意思的问题，之前我们老板面试我的时候问过我O(^_^)O</p>
+<pre>
+a = 1
+def g():
+    print a
+
+def f():
+    print a
+    a = 2
+    print a
+
+g()
+f()
+</pre>
+
+<p>当时我认为输出的结果是1 1 2。其实这段代码在运行f()第一个print a的时候就报错了，”local variable ‘a’ referenced before assignment”。简单的说，原因就是在编译成pyc文件的时候，f()中a的变量就已经确定是local变量了，所以在执行第一句print a的时候，发现a是未定义的，所以就报错了。通过dis查看编译生成的字节码就能看出两个print a的差异(g()中的print a和f()中的第一个print a的差异)。</p>
+<pre>
+g()中print a的字节码为
+# 0 LOAD_GLOBAL        0
+# 3 PRINT_ITEM
+# 4 PRINT_NEWLINE
+
+f()中第一句print a的字节码为
+# 0 LOAD_FAST          0
+# 3 PRINT_ITEM
+# 4 PRINT_NEWLINE
+</pre>
+
+<p>LOAD_GLOBAL的意思是从global空间中加载变量 而 LOAD_FAST是从local空间中加载变量。</p>
+<p>在Python中Python解释器充当了CPU的角色，Python解释器中可能运行了很多进程，每个进程中可能有很多线程，而线程下面又有很多栈帧。这样一想整个Python虚拟机的框架就出来了。O(^_^)O</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="http://mreleven.com/2014/10/06/本杰明巴顿带给我的启示/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -2077,188 +2228,6 @@ BINARY_DIVIDE其实是调用了一个叫PyNumber_Divide(v, w)；的一个函数�
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://mreleven.com/2014/10/05/Python的编译结果:pyc文件/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Mr.Eleven">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="http://mreleven.oss-cn-hangzhou.aliyuncs.com/blog/270356B2-2258-4753-AC46-0A4CEC06DF78.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Eleven's blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2014/10/05/Python的编译结果:pyc文件/" itemprop="url">Python的编译结果：pyc文件</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2014-10-05T00:00:00+08:00">
-                2014-10-05
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Python源码剖析/" itemprop="url" rel="index">
-                    <span itemprop="name">Python源码剖析</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>从学编程开始老师就教我们Java是一门编译型语言。而《C#高级编程》中却没有说C#是一门编译型语言。我不知道编译型和解释型语言的明确区别，但是不论是Python还是Java、C#，他们的工作流程都一样，先编译撑一个中间语言，然后交给虚拟机/运行时/解释器来执行命令。Python的编译结果就是今天要讲的pyc文件。pyc文件经常让开发者忽略，而且十分讨厌。</p>
-<p>Python的项目中总是带有一大堆的pyc文件，即使你删除了，你重新运行一下项目，他们还是会生成。但是很少有人知道什么时候会生成pyc。python a.py这样是不会生成a.pyc的，pyc文件的生成是通过import来触发的，也就是说，import a这样才会生成pyc文件。如果想知道pyc文件中存了什么，首先必须知道python的工作机制。<br>普通的python代码是不会运行的，必须编译成字节码，然后把字节码交给python解释器(python虚拟机)，python虚拟机把这些字节码翻译成CPU指令。而pyc文件中的就是字节码和一些静态数据。</p>
-<p>PyCodeObject对象就是Python编译器编译完py文件后在内存中的对象。PyCodeObject写入文件后就形成了pyc文件。所以PyCodeObject才是真正的编译结果。</p>
-<pre>
-typedef struct {
-    PyObject_HEAD
-    int co_argcount;        // arg的数量
-    int co_nlocals;         // 局部变量的数量
-    int co_stacksize;       // 需要用到的栈的空间
-    int co_flags;           // 不知道干嘛用的
-    PyObject *co_code;      // 字节码指令序列，以PyStringObject的形式存在
-    PyObject *co_consts;    // PyTupleObject对象，保存这个PyCodeObject中的常量
-    PyObject *co_names;     // PyTupleObject 变量名
-    PyObject *co_varnames;  // 局部变量的变量名
-    PyObject *co_freevars;  // 闭包
-    PyObject *co_cellvars;  // 嵌套函数所引用的局部变量名集合
-    PyObject *co_filename;  // 对应的文件的完整路径
-    PyObject *co_name       // 命名空间的名字
-    int co_firstlineno;     // 对应的源文件的这个PyCodeObject的第一行
-    PyObject *co_lnotab;    // 字节码与行号的对应关系
-    void *co_zombieframe;   //
-} PyCodeObject;
-</pre>
-
-<p>PyCodeObject对应的是一个命名空间的代码块，所以一个py文件可以生成很多个PyCodeObject对象,这些PyCodeObject对象是以与代码相应的嵌套结构存放在一个pyc文件中。而pyc中存放的不仅仅是PyCodeObject对象，还存放了magic number和pyc文件的创建时间。magic number是用来确定python的版本的一个特殊数字，pyc创建时间是用来确定是否需要重新生成pyc文件。</p>
-<p>PyCodeObject写入文件主要通过了两个基本的方法，w_long(longx, WFILE <em>p)和w_string(char </em>s, int n, WFILE <em>p)方法，而python源码又将这些两个方法组合撑一个对外的方法w_object(PyObject </em>v, WFILE *p)方法。在写入一个变量之前，总是会在前面先写入这个变量的类型，例如TYPE_INT,TYPE_LIST, TYPE_CODE等，这些类型标识以及标识对应的简写符号全部放在import.c文件中。Python在向pyc文件写入字符串的时候比较特殊，要注意interned机制(在pyc中也存在interned机制)。</p>
-<p>查看PyCodeObject对象的方法。</p>
-<pre>
->>> f = open("tt.py").read()
->>> co = compile(f, "tt.py", "exec")
->>> dir(co)
->>> co.co_code
-</pre>
-
-<p>另外也能查看一个CodeObjectBlock对应的字节码。</p>
-<pre><code>
-In [8]: import a
-"hi"
-
-In [9]: import dis     
-
-In [10]: dis.dis(a)
-Disassembly of say:
-  5           0 LOAD_CONST               1 ('hello world')
-              3 PRINT_ITEM          
-              4 PRINT_NEWLINE       
-              5 LOAD_CONST               0 (None)
-              8 RETURN_VALUE 
-</code></pre>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -2309,7 +2278,7 @@ Disassembly of say:
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">31</span>
+                <span class="site-state-item-count">32</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -2331,7 +2300,7 @@ Disassembly of say:
             
             <div class="site-state-item site-state-tags">
               
-                <span class="site-state-item-count">18</span>
+                <span class="site-state-item-count">19</span>
                 <span class="site-state-item-name">标签</span>
               
             </div>

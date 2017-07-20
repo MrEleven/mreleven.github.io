@@ -77,7 +77,7 @@
 <link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Python," />
+  <meta name="keywords" content="打卡," />
 
 
 
@@ -93,17 +93,17 @@
 
 
 
-<meta name="description" content="Python虚拟机的运行原理和exe文件在x86架构的CPU中执行的原理类似。都是通过栈帧的方式来执行的(其实就是一个栈指针在一个栈中移来移去，然后不停地出栈入栈，不停创建栈帧)，至于具体怎么运行的比较麻烦，我就不说的，自己看书去。简单来说栈帧和python中命名空间是对应的。一个栈帧对应一个命名空间，所以一个栈帧也对应一个PyCodeObject对象。在Python中栈帧的抽象叫做PyFrame">
-<meta name="keywords" content="Python">
+<meta name="description" content="虽然Bootstrap之前一直在用，不过每次都是边查边用。从来没有系统学过。今天重新看了一下Bootstrap的文档。发现自己大部分用法都是不规范的。 今天主要是看了一下bootstrap的基本布局，栅格系统。bootstrap的诞生主要是为了解决响应式问题，它将屏幕设备分成四种，.col-xs-，.col-sm-(750px)，.col-md-(970px)，.col-lg-(1170px)。默">
+<meta name="keywords" content="打卡">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Python虚拟机整体框架">
-<meta property="og:url" content="http://mreleven.com/2014/10/07/python虚拟机整体框架/index.html">
+<meta property="og:title" content="BootStrap栅格系统">
+<meta property="og:url" content="http://mreleven.com/2017/07/21/BootStrap栅格系统/index.html">
 <meta property="og:site_name" content="Eleven&#39;s blog">
-<meta property="og:description" content="Python虚拟机的运行原理和exe文件在x86架构的CPU中执行的原理类似。都是通过栈帧的方式来执行的(其实就是一个栈指针在一个栈中移来移去，然后不停地出栈入栈，不停创建栈帧)，至于具体怎么运行的比较麻烦，我就不说的，自己看书去。简单来说栈帧和python中命名空间是对应的。一个栈帧对应一个命名空间，所以一个栈帧也对应一个PyCodeObject对象。在Python中栈帧的抽象叫做PyFrame">
-<meta property="og:updated_time" content="2017-07-18T14:08:10.000Z">
+<meta property="og:description" content="虽然Bootstrap之前一直在用，不过每次都是边查边用。从来没有系统学过。今天重新看了一下Bootstrap的文档。发现自己大部分用法都是不规范的。 今天主要是看了一下bootstrap的基本布局，栅格系统。bootstrap的诞生主要是为了解决响应式问题，它将屏幕设备分成四种，.col-xs-，.col-sm-(750px)，.col-md-(970px)，.col-lg-(1170px)。默">
+<meta property="og:updated_time" content="2017-07-20T17:09:48.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Python虚拟机整体框架">
-<meta name="twitter:description" content="Python虚拟机的运行原理和exe文件在x86架构的CPU中执行的原理类似。都是通过栈帧的方式来执行的(其实就是一个栈指针在一个栈中移来移去，然后不停地出栈入栈，不停创建栈帧)，至于具体怎么运行的比较麻烦，我就不说的，自己看书去。简单来说栈帧和python中命名空间是对应的。一个栈帧对应一个命名空间，所以一个栈帧也对应一个PyCodeObject对象。在Python中栈帧的抽象叫做PyFrame">
+<meta name="twitter:title" content="BootStrap栅格系统">
+<meta name="twitter:description" content="虽然Bootstrap之前一直在用，不过每次都是边查边用。从来没有系统学过。今天重新看了一下Bootstrap的文档。发现自己大部分用法都是不规范的。 今天主要是看了一下bootstrap的基本布局，栅格系统。bootstrap的诞生主要是为了解决响应式问题，它将屏幕设备分成四种，.col-xs-，.col-sm-(750px)，.col-md-(970px)，.col-lg-(1170px)。默">
 
 
 
@@ -131,13 +131,13 @@
 
 
 
-  <link rel="canonical" href="http://mreleven.com/2014/10/07/python虚拟机整体框架/"/>
+  <link rel="canonical" href="http://mreleven.com/2017/07/21/BootStrap栅格系统/"/>
 
 
 
 
 
-  <title>Python虚拟机整体框架 | Eleven's blog</title>
+  <title>BootStrap栅格系统 | Eleven's blog</title>
   
 
 
@@ -256,7 +256,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://mreleven.com/2014/10/07/python虚拟机整体框架/">
+    <link itemprop="mainEntityOfPage" href="http://mreleven.com/2017/07/21/BootStrap栅格系统/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Mr.Eleven">
@@ -273,7 +273,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Python虚拟机整体框架</h1>
+          <h1 class="post-title" itemprop="name headline">BootStrap栅格系统</h1>
         
 
         <div class="post-meta">
@@ -285,8 +285,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2014-10-07T00:00:00+08:00">
-                2014-10-07
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-07-21T01:06:59+08:00">
+                2017-07-21
               </time>
             
 
@@ -295,28 +295,6 @@
             
           </span>
 
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Python源码剖析/" itemprop="url" rel="index">
-                    <span itemprop="name">Python源码剖析</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
           
 
           
@@ -342,56 +320,9 @@
       
 
       
-        <p>Python虚拟机的运行原理和exe文件在x86架构的CPU中执行的原理类似。都是通过栈帧的方式来执行的(其实就是一个栈指针在一个栈中移来移去，然后不停地出栈入栈，不停创建栈帧)，至于具体怎么运行的比较麻烦，我就不说的，自己看书去。简单来说栈帧和python中命名空间是对应的。一个栈帧对应一个命名空间，所以一个栈帧也对应一个PyCodeObject对象。在Python中栈帧的抽象叫做PyFrameObject。</p>
-<pre>
-[frameobject.h]
-typedef struct _frame {
-    PyObject_VAR_HEAD
-    struct _frame *f_back;     // 执行环境链上的前一个frame
-    PyCodeObject *f_code;      // PyCodeObject对象
-    PyObject *f_builtins;      // builtin命名空间
-    PyObject *f_globals;       // global命名空间
-    PyObject *f_locals;        // local命名空间
-    PyObject **f_valuestack;   // 运行时栈的栈底位置
-    PyObject **f_stacktop;     // 运行时栈的栈顶位置
-    ...
-    int f_lasti;       // 上一条字节码指令在f_code中的偏移位置
-    int f_lineno;      // 当前字节码对应的源代码行
-    PyObject *f_localsplus[1]; // 动态内存。(局部变量 + cell对象集合 + free对象集合 + 运行时栈)
-} PyFrameObject;
-</pre>
-
-<p>书本上说这里的f_code存放的是一个待执行的PyCodeObject对象，而不是当前正在执行的PyCodeObject，我表示有点小怀疑，待会我去验证一下。f_builtins, f_globals, f_locals分别对应了三个PyDictObject，维护了builtin, global, 三个命名空间中name，以及local命名空间中name和value之间的对应关系。因为每个PyCodeBlock所需要的栈空间大小都是不一样的，所以PyFrameObject是一个可变长的对象，而f_localsplus所指向的就是PyCodeBlock所需要的栈空间和其他一些内存。实际上，运行时栈空间是f_valuestack和f_stacktop之间的空间，其他的空间是用来存放闭包变量的。Python标准库中的sys模块提供了对PyFrameObject的访问，具体的函数是sys._getframe()。</p>
-<p>在Python中赋值语句会在local命名空间中创建约束(所谓的约束，就是变量名和变量名对应的值的对应关系)。赋值语句在Python中不单单指存在赋值符号的语句，还包括了def, class, import，for这样的语句。关于命名空间这个东西记住一点：Python中命名空间是静态的，而不是动态的。也就是说作用域仅仅由源程序的文本决定，而不是由运行时动态决定的(所以也叫词法作用域)。至于Python的LGB规则和LEGB规则我也不想多说了，只要按照最内嵌套作用域规则来推导就行了。关于Python的静态作用域，还有一个比较有意思的问题，之前我们老板面试我的时候问过我O(^_^)O</p>
-<pre>
-a = 1
-def g():
-    print a
-
-def f():
-    print a
-    a = 2
-    print a
-
-g()
-f()
-</pre>
-
-<p>当时我认为输出的结果是1 1 2。其实这段代码在运行f()第一个print a的时候就报错了，”local variable ‘a’ referenced before assignment”。简单的说，原因就是在编译成pyc文件的时候，f()中a的变量就已经确定是local变量了，所以在执行第一句print a的时候，发现a是未定义的，所以就报错了。通过dis查看编译生成的字节码就能看出两个print a的差异(g()中的print a和f()中的第一个print a的差异)。</p>
-<pre>
-g()中print a的字节码为
-# 0 LOAD_GLOBAL        0
-# 3 PRINT_ITEM
-# 4 PRINT_NEWLINE
-
-f()中第一句print a的字节码为
-# 0 LOAD_FAST          0
-# 3 PRINT_ITEM
-# 4 PRINT_NEWLINE
-</pre>
-
-<p>LOAD_GLOBAL的意思是从global空间中加载变量 而 LOAD_FAST是从local空间中加载变量。</p>
-<p>在Python中Python解释器充当了CPU的角色，Python解释器中可能运行了很多进程，每个进程中可能有很多线程，而线程下面又有很多栈帧。这样一想整个Python虚拟机的框架就出来了。O(^_^)O</p>
+        <p>虽然Bootstrap之前一直在用，不过每次都是边查边用。从来没有系统学过。今天重新看了一下Bootstrap的文档。发现自己大部分用法都是不规范的。</p>
+<p>今天主要是看了一下bootstrap的基本布局，栅格系统。bootstrap的诞生主要是为了解决响应式问题，它将屏幕设备分成四种，.col-xs-，.col-sm-(750px)，.col-md-(970px)，.col-lg-(1170px)。默认份12列。容器分别是.container -&gt; .row -&gt; .col -&gt; .row -&gt; .col（支持嵌套）。<br>技术实现上主要是用了padding: 15px;和margin: -15px;。通过对一个html标签设置多个col类别的属性，来适应屏幕尺寸的变化。</p>
+<p>昨天虎哥微信上找我，他告诉我他去了菜鸟网络。虎哥还是屌屌的，恭喜虎哥。</p>
 
       
     </div>
@@ -421,7 +352,7 @@ f()中第一句print a的字节码为
       
         <div class="post-tags">
           
-            <a href="/tags/Python/" rel="tag"># Python</a>
+            <a href="/tags/打卡/" rel="tag"># 打卡</a>
           
         </div>
       
@@ -434,8 +365,8 @@ f()中第一句print a的字节码为
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2014/10/06/本杰明巴顿带给我的启示/" rel="next" title="本杰明巴顿带给我的启示">
-                <i class="fa fa-chevron-left"></i> 本杰明巴顿带给我的启示
+              <a href="/2017/07/15/hello-world/" rel="next" title="抛弃Jekyll，转移到Hexo">
+                <i class="fa fa-chevron-left"></i> 抛弃Jekyll，转移到Hexo
               </a>
             
           </div>
@@ -443,10 +374,6 @@ f()中第一句print a的字节码为
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2014/10/07/python字节码/" rel="prev" title="Python字节码">
-                Python字节码 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
