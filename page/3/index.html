@@ -256,6 +256,322 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://mreleven.com/2014/12/18/以机器指令的角度看过程调用/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Mr.Eleven">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://mreleven.oss-cn-hangzhou.aliyuncs.com/blog/270356B2-2258-4753-AC46-0A4CEC06DF78.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Eleven's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2014/12/18/以机器指令的角度看过程调用/" itemprop="url">以机器指令的角度看过程调用</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2014-12-18T00:00:00+08:00">
+                2014-12-18
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/计算机组成原理/" itemprop="url" rel="index">
+                    <span itemprop="name">计算机组成原理</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>最近真是闲得蛋疼啊，看完了第二遍《Python源码剖析》之后开始看计算机组成原理。</p>
+<p>回顾一下，自从接触了Python，扯了一大堆东西。从windows转移到Linux(现在用的是OS X—苹果系统)。从VS2012转移到vim，再到现在得emacs。从Sql Server到Mysql。从web开发，桌面应用开发，到各种服务和api的开发。</p>
+<p>从米帮的基础框架sputnik开始扯，到看tornado源码，然后学HTTP协议和Linux IO多路复用模型，然后到C语言基础，然后到各种算法和数据结构，然后到编译原理，然后到现在的计算机组成原理。好大的一个栈。不知道什么时候能够全部出栈，不知道接下去是不是还要继续把状态机，图灵机什么的也压入栈。不得不感慨一句：跳出.net，外面又是一个十分广阔的世界。</p>
+<p>好吧，不扯远了。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">int leaf_example(int g, int h, int i, int j)</div><div class="line">&#123;</div><div class="line">	int f;</div><div class="line"></div><div class="line">	f = (g + h) - (i + j);</div><div class="line">	return f;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<pre>
+leaf_example:
+# 保存现场
+addi    $sp, $sp, -12        # 调整栈指针
+sw    $t1, 8 ($sp)        # 保存$t1寄存器的内容到当前栈帧的栈底
+sw    $t0, 4 ($sp)        # 保存$t0寄存器的内容到$t1的上面
+sw    $s0, 0 ($sp)        # 保存$s0寄存器的内容到栈顶
+
+# 函数体执行
+add     $t0, $a0, $a1        # 计算g + h并将结果保存到$t0寄存器
+add     $t1, $a2, $a3        # 计算i + j并将结果保存到$t1寄存器
+sub    $s0, $t0, $t1        # 计算( $t0 - $t1 )并将结果保存再$s0
+add     $v0, $s0, $zero        # 记录返回值
+
+# 恢复现场
+lw    $s0, 0 ($sp)        # 将栈顶数据加载到$s0寄存器中
+lw    $t0, 4 ($sp)        # 将接下来的数据加载到$t0寄存器中
+lw    $t1, 8 ($sp)        # 将栈底的数据加载到$t1寄存器中
+addi    $sp, $sp, 12        # 将栈指针向上移动3个单位
+
+# 控制转移
+jr    $ra                # 将控制权转移给调用者
+</pre>
+
+<p>总得来说一个函数调用过程需要进行这几个步骤。首先是当前CPU现场得保存，然后执行函数体，最后恢复现场将控制权转移给调用者。</p>
+<p>因为CPU中寄存器的数量有限，所以在寄存器数量不够的情况下，需要将寄存器中的数据转移到内存中(PS：我还知道转移的指令是数据传输指令：存字和取字指令)。</p>
+<p>当然这里过程调用的现场保存主要还是为了方便恢复现场，只有恢复了现场，在被调用的过程执行完之后，当前过程才能继续正确执行。</p>
+<p>被转移出去的数据是以栈的形式存放在内存中的，$sp就是这个栈的栈顶指针。</p>
+<p>另外这几个寄存器也是有特定含义的，$sp之前说过了，是当前运行时栈的栈指针，$t0~$t9这10个寄存器是临时寄存器，用来存放临时变量，$s0~$s7保留寄存器，一旦使用由被调用者保存和恢复。$v0~$v1用来存放过程调用中的返回值，$a0~$a3用来存放过程调用中的参数信息。$ra是是用来存放返回地址的，还有一个抽象的东西，程序计数器，存放CPU要执行的下一条指令，其实程序计数器并不是真实存在的一个寄存器，每个体系的好像都不一样，在x86体系中是CS:IP这两个寄存器的组合。</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://mreleven.com/2014/12/14/计算机中补码到底解决了什么问题/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Mr.Eleven">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://mreleven.oss-cn-hangzhou.aliyuncs.com/blog/270356B2-2258-4753-AC46-0A4CEC06DF78.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Eleven's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2014/12/14/计算机中补码到底解决了什么问题/" itemprop="url">计算机中补码到底解决了什么问题</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2014-12-14T00:00:00+08:00">
+                2014-12-14
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/基础/" itemprop="url" rel="index">
+                    <span itemprop="name">基础</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p> 大学的时候计算机组成原理曾经说过原码，反码，补码这三种整数的表示类型。那个时候2B一样，只知道通过这些可以把正数，负数，0的算术运算统一掉，具体怎么统一那个时候一直很疑惑。知道几个星期前我上网查了才明白。</p>
+<p>首先CPU中的运算器只能执行加法运算，不能执行减法运算，但是减法运算可以转化成加上一个负数的加法运算。</p>
+<p>第二个条件是计算机是有字长的，也就是说会有溢出的产生。（溢出是什么，你们自己百度吧，大概意思就是数据太大寄存器无法表示，就丢弃了一些数据）</p>
+<p>补码的诞生主要是为了解决将减法转化成加法的问题。</p>
+<p>考虑时钟上时间的计算，假设现在时针指向数字3，若问“6小时前时针指向的数字是几”，则可以：</p>
+<ol>
+<li>将时针逆时针拨动6格。</li>
+<li>将时针顺时针拨动12 - 6 = 6格。</li>
+</ol>
+<p>这两种方式的结果是一样的。这里称12是“模。</p>
+<p>故有 3时 - 6个小时 = 3时 + （12 - 6个小时），这里可以看到将减法转换成加法的过程，即“加上模减去绝对值的差”。</p>
+<p>而我们知道，计算机是有字长的，通过这个思想我们就可以把计算机中的减法转化成加上一个“正整数”的方式来做了。</p>
+<p>计算机中算术运算的模就是2的计算机字长次方。也就是最小能产生溢出的正整数。</p>
+<p>所以x的补码的计算 x的补码 ＝ 2^n - x(n是计算机的字长)<br>同时x + !x + 1 = 2^n(!x表示对x进行取反操作)<br>所以x = !x + 1（这就是这个计算公式的由来）</p>
+<p>参考网址：<a href="http://www.douban.com/note/223507364/" target="_blank" rel="external">http://www.douban.com/note/223507364/</a> (大神真是活跃于各个社区)</p>
+<p><a href="http://www.zhihu.com/question/20159860" target="_blank" rel="external">http://www.zhihu.com/question/20159860</a></p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="http://mreleven.com/2014/12/11/Python中几个常用的属性访问包装器/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1645,553 +1961,6 @@ Python和C#一样，都是采用引用计数来实现垃圾回收机制的。不
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://mreleven.com/2014/10/13/Python函数/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Mr.Eleven">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="http://mreleven.oss-cn-hangzhou.aliyuncs.com/blog/270356B2-2258-4753-AC46-0A4CEC06DF78.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Eleven's blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2014/10/13/Python函数/" itemprop="url">Python函数</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2014-10-13T00:00:00+08:00">
-                2014-10-13
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Python源码剖析/" itemprop="url" rel="index">
-                    <span itemprop="name">Python源码剖析</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>def f():<br>    print ‘hello’</p>
-<p>Python函数在编译的时候会创建单独的PyCodeObject对象，但是有意思的是上面这段代码会分布在两个PyCodeObject，def f():这句话编译的字节码位于文件PyCodeObject中，这句话其实是创建了一个PyFuncObject对象，并将这个对象和f这个变量在global命名空间中创建约束，然后创建一个新的PyCodeObject，print ‘hello’的字节码就是放在这个PyCodeObject中。</p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://mreleven.com/2014/10/07/python字节码/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Mr.Eleven">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="http://mreleven.oss-cn-hangzhou.aliyuncs.com/blog/270356B2-2258-4753-AC46-0A4CEC06DF78.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Eleven's blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2014/10/07/python字节码/" itemprop="url">Python字节码</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2014-10-07T00:00:00+08:00">
-                2014-10-07
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Python源码剖析/" itemprop="url" rel="index">
-                    <span itemprop="name">Python源码剖析</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>绝对清晰，是风格上唯一的美。既然是美的东西，我们总是要追求的，如果不熟悉Python虚拟机中执行的字节码，那么又怎么能被称作是绝对清晰呢？</p>
-<p>首先是最简单的简单内建对象的创建。看下面四句语句。</p>
-<pre>
-[simple_obj.py]
-i = 1
-s = "Python"
-d = {}
-l = []
-</pre>
-这个文件被编译后的对应的PyCodeObject对象的co_names和co_consts的xml结构如下
-<pre>
-&lt;consts&gt;
-    &lt;int value="1" /&gt;
-    &lt;internStr index="0" length="6" value="Python" /&gt;
-    &lt;NoneObject /&gt;
-&lt;/consts&gt;
-&lt;names&gt;
-    &lt;internStr index="1" length="1" value="i" /&gt;
-    &lt;internStr index="2" length="1" value="s" /&gt;
-    &lt;internStr index="3" length="1" value="d" /&gt;
-    &lt;internStr index="4" length="1" value="l" /&gt;
-&lt;/names&gt;
-</pre>
-co_names存放了这段代码的所有局部变量名，co_consts存放了这段代码中的所有静态变量
-
-Python解释器执行字节码的入口函数就是PyEval_EvalFrameEx()。这个函数中定义了大量的宏
-<pre>
-GETITEM(v, i)   // 从tuple中获取元素
-STACKADJ(n)     // 调整栈顶指针的位置
-PUSH(v)         // 入栈
-POP()           // 出栈
-</pre>
-
-<pre>
-i = 1 对应的字节码如下
-0 LOAD_CONST    0   (1)     // 加载偏移量为0的常量
-3 STORE_NAME    0   (i)     // 将加载的值与偏移量为0的变量名形成约束，并存入local命名空间。
-
-s = "Python" 对应的字节码如下
-6 LOAD_CONST    1   ("Python")
-9 STORE_NAME    1   (s)
-
-d = {} 对应的字节码如下
-12 BUILD_MAP    0
-15 STORE_NAME   2   (d)
-
-l = []
-18 BUILD_LIST   0
-21 STORE_NAME   3   (l)
-24 LOAD_CONST   2   (none)  // 24和27的语句表示python执行完一段codeblock后必须有返回值，默认返回None。
-27 RETURN_VALUE
-
-而LOAD_CONST的实现可以当作下面的语句
-x = GETITEM(consts, oparg); // 从consts中获取对应偏移量的元素值
-Py_INCREF(x);               // 增加x变量的引用计数
-PUSH(x);                    // 入栈
-
-BUILD_MAP的实现如下
-x = PyDict_New();
-PUSH(x);
-
-RETURN_VALUE的实现如下
-retval = POP();
-why = WHY_RETURN;       // why在Python虚拟机的消息循环中作一个标志，异常机制就是用它实现的
-</pre>
-
-<pre>
-[adv_obj.py]
-i = 1
-s = "Python"
-d = {"1": 1, "2": 2}
-l = [1, 2]
-
-adv_obj.py对应的PyCodeObject的names和consts的xml结构如下
-&lt;consts&gt;
-    &lt;int value="1" /&gt;
-    &lt;internStr index="0" length="6" value="Python" /&gt;
-    &lt;internStr index="1" length="1" value="1" /&gt;
-    &lt;int value="2" /&gt;
-    &lt;internStr index="2" length="1" value="2" /&gt;
-    &lt;NoneObject /&gt;
-&lt;/consts&gt;
-&lt;names&gt;
-    &lt;internStr index="3" length="1" value="i" /&gt;
-    &lt;internStr index="4" length="1" value="s" /&gt;
-    &lt;internStr index="5" length="1" value="d" /&gt;
-    &lt;internStr index="6" length="1" value="l" /&gt;
-&lt;/names&gt;
-这里consts中只有一个&lt;int value="1"&gt;是因为Python对整数的处理也有一套类似雨字符串的internal机制。
-
-d = {"1": 1}
-12 BUILD_MAP    0
-15 DUP_TOP                  // 增加了map的引用计数，将map再一次压入栈中
-16 LOAD_CONST   0   (1)
-19 ROT_TWO                  // 将栈顶元素和第二个元素交换位置
-20 LOAD_CONST   2   ("1")
-23 STORE_SUBSCR             // 将("1": 1)这个item插入到上面的map中，并将栈顶指针上移三个
-24 DUP_TOP
-25 LOAD_CONST   3   (2)
-28 ROT_TWO
-29 LOAD_CONST   4   ("2")
-32 STORE_SUBSCR
-33 STORE_NAME   2   (d)     // 将上面的map与偏移量为2的变量名(d)生成约束，存入local空间中
-
-[DUP_TOP]       // 注意 DUP_TOP不仅仅增加了栈顶元素的引用计数，还将栈顶元素再一次压入栈中
-v = TOP();
-Py_INCREF(v);
-PUSH(v);
-
-[ROT_TWO]
-v = TOP()
-w = SECOND();
-SET_TOP(w);
-SET_SECOND(v);
-
-[STORE_SUBSCR]
-w = TOP();
-v = SECOND();
-u = THIRD();
-STACKADJ(-3);
-PyObject_SetItem(v, w, u);
-Py_DECREF(u);
-Py_DECREF(v);
-Py_DECREF(w);
-
-l = [1, 2]
-36 LOAD_CONST   0   (1)
-39 LOAD_CONST   3   (2)
-42 BUILD_LIST   2           // 创建list，并将前两个元素填入list。
-45 STORE_NAME   3   (1)
-
-list的创建比较有意思，他会先把list中的元素压入运行时栈，然后通过BUILD_LIST传贱list对象，并把前面的对象(参数为元素的数量)填入list中。
-</pre>
-
-<pre>
-[normal.py]
-a = 5
-b = a
-c = a + b
-print c
-
-&lt;consts&gt;
-    &lt;int value="5" /&gt;
-    &lt;NoneObject /&gt;
-&lt;/consts&gt;
-&lt;names&gt;
-    &lt;internStr index="0" length="1" value="a" /&gt;
-    &lt;internStr index="1" length="1" value="b" /&gt;
-    &lt;internStr index="2" length="1" value="c" /&gt;
-&lt;/names&gt;
-
-b = a
-0 LOAD_NAME     0   (a)     // 会按顺序从local, globals, builtin三个命名空间中去寻找a
-3 STORE_NAME    1   (b)
-
-c = a + b
-12 LOAD_NAME    0   (a)
-15 LOAD_NAME    1   (b)
-18 BINARY_ADD               // 这条指令，表示将上面两个数相加，这里又涉及到加法的快速通道(int和str专用)和慢速通道
-19 STORE_NAME   2   (c)
-
-print c
-22 LOAD_NAME    2   (c)
-25 PRINT_ITEM  
-26 PRINT_NEWLINE
-
-[PRINT_ITEM_TO]     // 这条语句主要是用于输出重定向
-w = stream = POP();
-</pre>
-
-<pre>
-[if_control.py]
-a = 1
-if a > 10:
-    print "a > 10"
-elif a <= -2:="" print="" "a="" <="-2"" elif="" a="" !="1:" 1:="" 1"="" else:="" "unknown="" a"="" if=""> 10:
-6 LOAD_NAME     0   (a)
-9 LOAD_CONST    1   (10)
-12  COMPARE_OP  4   (>)         // 这个字节码为int对象实现了快速通道
-15  JUMP_IF_FALSE   9   (to 27)
-18  POP_TOP
-    print "a > -1"
-19  LOAD_CONST  2   ("a>-1")
-22  PRINT_ITEM
-23  PRINT_NEWLINE
-24  JUMP_FORWARD    72  (to 99)
-27  POP_TOP
-elif a <= 0="" 1="" 3="" 9="" 28="" 31="" 34="" 37="" 40="" -2:="" load_name="" (a)="" load_const="" (-1)="" compare_op="" (<=")" jump_if_false="" (to="" 49)="" pop_top="" 其实大部分判断语句的结构都是相同的="" -="">  LOAD_CONST  ->  COMPARE_OP  ->  JUMP_*
-从local命名空间中获得变量名a所对应的值，从常量表consts中读取参与该分支判断操作的常量对象，进行比较获取得结果true/false，根据结果进行指令跳转。
-python中的判断语句除了比较语句，还包括了is, in, not in, is not,(还有一个叫PyCmp_EXC_MATCH的东西，好像是和异常处理有关。。。)
-
-list = [1, 2, 3, 4]
-if l in list:
-LOAD_CONST      0   (1)
-LOAD_NAME       0   (list)
-COMPARE_OP      6   (in)
-JUMP_IF_FALSE
-POP_TOP         // 将比较结果移出栈顶
-
-python的比较结果只有两个Py_False和Py_True，底层的实现其实就是0和1。
-在Python中，有一些字节码通常都是成对顺序出现的，所以python中还有一个指令预测功能，预测功能通常会用到下面几个宏。
-PREDICT(op)
-PREDICTED(op)
-PREDICTED_WITH_ARG(op)
-PEEKARG()
-
-比如PREDICT(JUMP_IF_FALSE)的意思就是检查下一条待处理的字节码是否是JUMP_IF_FALSE。如果是，则程序的流程会跳转到PRED_JUMP_IF_FALSE标志符对应的代码处。
-这主要是通过goto语句实现的，也就是说，如果下一句语句是JUMP_IF_FALSE的话，JUMP_IF_FALSE这句字节码就不用再次顺序地进入Python虚拟机的消息循环了，直接通过goto语句跳到case JUMP_IF_FALSE:这个地方，并将指向下一条语句的指针向后移一位。相当于以更快速的方式执行了JUMP_IF_FALSE。
-
-将COMPARE_OP中实现的PREDICT宏展开如下：
-[COMPARE_OP]
-...
-if(*next_instr == JUMP_IF_FALSE)
-    goto PRED_JUMP_IF_FALSE;
-if(*next_instr == JUMP_IF_TRUE)
-    goto PRED_JUMP_IF_TRUE;
-
-JUMPBY(x)   表示下一条字节码的指针移动x个字节。
-
-[for_control.py]
-lst = [1, 2]
-0   LOAD_CONST  0   (1)
-3   LOAD_CONST  1   (2)
-6   BUILD_LIST  2
-9   STORE_NAME  0   (lst)
-for i in lst:
-12  SETUP_LOOP  19  (to 34)
-15  LOAD_NAME   0   (lst)
-18  GET_ITER                    // 获取迭代器
-19  FOR_ITER    11  (to 33)
-22  STORE_NAME  1   (i)
-    print i
-25  LOAD_NAME   1   (i)
-28  PRINT_ITEM
-29  PRINT_NEWLINE   
-30  JUMP_ABSOLUTE   19          // 跳转到绝对地址19
-33  POP_BLOCK                   // 跳出PyTryBlock，相当于是将PyFrameObject中的f_blockstack数组的当前index向前移动一个，这样简单的方式不对称但是很简单。
-34  LOAD_CONST  2   (None)
-37  RETURN_VALUE
-
-之前我们谈到过PyFrameObject对象中有一个成员变量叫f_blockstack。
-typedef struct _frame   {
-    ...
-    int f_iblock;
-    PyTryBlock  f_blockstack[CO_MAXBLOCKS];
-    ...
-} PyFrameObject;
-
-typedef struct {
-    int b_type;     // block类型
-    int b_handler;  // where to jump to find handler
-    int b_level;    // value stack level to pop to
-} PyTryBlock;
-剧透一下PyTryBlock一般用于异常处理和循环O(^_^)O
-
-1/0
-#   LOAD_CONST  0
-#   LOAD_CONST  1
-#   BINARY_DIVIDE
-
-BINARY_DIVIDE其实是调用了一个叫PyNumber_Divide(v, w)；的一个函数，如果这个函数返回NULL，表示有异常产生，异常是通过PyErr_SetString(PyExc_ZeroDivisionError, "integer division or modulo by zero")产生。PyExc_ZeroDivisionError这其实是一个PyObject(好吧，这是废话)，在Python环境初始化的时候就会被创建。
-异常信息会被记录到线程状态对象PyThreadState中。当有异常发生的时候把Python消息循环的标志why设置为有异常发生。并且会沿着PyFrameObject传递，并且会沿反方向记录traceback。而try跟finally会创建两种PyTryBlock，在跳出blockstack后会进入except和finally的PyTryBlock。也就是说，try中的语句会在finnaly和exception的上层执行，退出后肯定会进入下面的PyTryBlock。
-另外还有一个有意思的地方就是Python消息循环的函数是递归调用的，一般一个PyCodeObject回对应一个消息循环的入口函数。
-</=></=></pre>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -2242,7 +2011,7 @@ BINARY_DIVIDE其实是调用了一个叫PyNumber_Divide(v, w)；的一个函数�
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">34</span>
+                <span class="site-state-item-count">36</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
