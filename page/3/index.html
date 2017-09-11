@@ -1163,149 +1163,6 @@ jr    $ra                # 将控制权转移给调用者
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://mreleven.com/2014/12/06/集齐7种排序算法召唤神猿/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Mr.Eleven">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="http://mreleven.oss-cn-hangzhou.aliyuncs.com/blog/270356B2-2258-4753-AC46-0A4CEC06DF78.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Eleven's blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2014/12/06/集齐7种排序算法召唤神猿/" itemprop="url">集齐7种排序算法召唤神猿</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2014-12-06T00:00:00+08:00">
-                2014-12-06
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/算法/" itemprop="url" rel="index">
-                    <span itemprop="name">算法</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>俗话说得好，连7种基本的排序算法都没学会，还想找女朋友？好吧，还是乖乖回去写排序吧。</p>
-<p>排序有很多种。最常用的就这7种：插入排序，冒泡排序，选择排序，归并排序，桶排序，堆排序，快速排序。</p>
-<p>插入排序：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div></pre></td><td class="code"><pre><div class="line">#include &quot;stdio.h&quot;</div><div class="line"></div><div class="line">#define ARRAYLEN 10</div><div class="line"></div><div class="line">void sort(int* array, int len)</div><div class="line">&#123;</div><div class="line">	int i = 0;</div><div class="line">	for(i=1; i&lt;len; i++)</div><div class="line">	&#123;</div><div class="line">		int base = array[i];</div><div class="line">		int j = i;</div><div class="line">		for(j=i-1;j&gt;=0;j--)</div><div class="line">		&#123;</div><div class="line">			if(array[j] &gt; base)</div><div class="line">			&#123;</div><div class="line">				array[j+1] = array[j];</div><div class="line">			&#125;</div><div class="line">			else</div><div class="line">			&#123;</div><div class="line">				array[j+1] = base;</div><div class="line">				break;</div><div class="line">			&#125;</div><div class="line">		&#125;</div><div class="line">		if(j == -1)</div><div class="line">		&#123;</div><div class="line">			array[0] = base;</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">int main(void)</div><div class="line">&#123;</div><div class="line">	int array[ARRAYLEN] = &#123;&#125;;</div><div class="line">	int i = 0;</div><div class="line">	for(i=0; i&lt; ARRAYLEN; i++)</div><div class="line">	&#123;</div><div class="line">		scanf(&quot;%d&quot;, &amp;array[i]);</div><div class="line">	&#125;</div><div class="line">	sort(array, ARRAYLEN);</div><div class="line">	for(i=0; i&lt; ARRAYLEN; i++)</div><div class="line">	&#123;</div><div class="line">		printf(&quot;%d &quot;, array[i]);</div><div class="line">	&#125;</div><div class="line">	printf(&quot;\n&quot;);</div><div class="line">	return 0;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>选择排序：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div></pre></td><td class="code"><pre><div class="line">#include &quot;stdio.h&quot;</div><div class="line"></div><div class="line">#define ARRAYLEN 10</div><div class="line"></div><div class="line">void sort(int* array, int len)</div><div class="line">&#123;</div><div class="line">	int i = 0;</div><div class="line">	for(i=0; i&lt;len; i++)</div><div class="line">	&#123;</div><div class="line">		int j = 0;</div><div class="line">		int min = i;</div><div class="line">		for(j=i; j&lt;len; j++)</div><div class="line">		&#123;</div><div class="line">			if(array[min] &gt; array[j])</div><div class="line">			&#123;</div><div class="line">				min = j;</div><div class="line">			&#125;</div><div class="line">		&#125;</div><div class="line">		if(min != j)</div><div class="line">		&#123;</div><div class="line">			int item = array[min];</div><div class="line">			array[min] = array[i];</div><div class="line">			array[i] = item;</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">int main(void)</div><div class="line">&#123;</div><div class="line">	int array[ARRAYLEN] = &#123;&#125;;</div><div class="line">	int i = 0;</div><div class="line">	for(i=0; i&lt; ARRAYLEN; i++)</div><div class="line">	&#123;</div><div class="line">		scanf(&quot;%d&quot;, &amp;array[i]);</div><div class="line">	&#125;</div><div class="line">	sort(array, ARRAYLEN);</div><div class="line">	for(i=0; i&lt; ARRAYLEN; i++)</div><div class="line">	&#123;</div><div class="line">		printf(&quot;%d &quot;, array[i]);</div><div class="line">	&#125;</div><div class="line">	printf(&quot;\n&quot;);</div><div class="line">	return 0;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>冒泡排序：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div></pre></td><td class="code"><pre><div class="line">#include &quot;stdio.h&quot;</div><div class="line"></div><div class="line">#define ARRAYLEN 10</div><div class="line"></div><div class="line">void sort(int* array, int len)</div><div class="line">&#123;</div><div class="line">	int i = 0;</div><div class="line">	int j = 0;</div><div class="line">	for(i=len-1; i&gt;0; i--)</div><div class="line">	&#123;</div><div class="line">		for(j=0; j&lt;i; j++)</div><div class="line">		&#123;</div><div class="line">			if(array[j] &gt; array[j+1])</div><div class="line">			&#123;</div><div class="line">				int item = array[j];</div><div class="line">				array[j] = array[j+1];</div><div class="line">				array[j+1] = item;</div><div class="line">			&#125;</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">int main(void)</div><div class="line">&#123;</div><div class="line">	int array[ARRAYLEN] = &#123;&#125;;</div><div class="line">	int i = 0;</div><div class="line">	for(i=0; i&lt; ARRAYLEN; i++)</div><div class="line">	&#123;</div><div class="line">		scanf(&quot;%d&quot;, &amp;array[i]);</div><div class="line">	&#125;</div><div class="line">	sort(array, ARRAYLEN);</div><div class="line">	for(i=0; i&lt; ARRAYLEN; i++)</div><div class="line">	&#123;</div><div class="line">		printf(&quot;%d &quot;, array[i]);</div><div class="line">	&#125;</div><div class="line">	printf(&quot;\n&quot;);</div><div class="line">	return 0;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>归并排序：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div></pre></td><td class="code"><pre><div class="line">#include &quot;stdio.h&quot;</div><div class="line"></div><div class="line">#define ARRAYLEN 10</div><div class="line"></div><div class="line">void merge_array(int* left, int len_left, int* right, int len_right, int* tmp)</div><div class="line">&#123;</div><div class="line">	int i = 0;</div><div class="line">	int j = 0;</div><div class="line">	int k = 0;</div><div class="line">	while(i&lt;len_left &amp;&amp; j&lt;len_right)</div><div class="line">	&#123;</div><div class="line">		if(left[i]&lt; right[j])</div><div class="line">		&#123;</div><div class="line">			tmp[k++] = left[i++];</div><div class="line">		&#125;</div><div class="line">		else</div><div class="line">		&#123;</div><div class="line">			tmp[k++] = right[j++];</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">	while(i &lt; len_left)</div><div class="line">	&#123;</div><div class="line">		tmp[k++] = left[i++];</div><div class="line">	&#125;</div><div class="line">	while(j &lt; len_right)</div><div class="line">	&#123;</div><div class="line">		tmp[k++] = right[j++];</div><div class="line">	&#125;</div><div class="line">	for(i=0;i&lt;k;i++)</div><div class="line">	&#123;</div><div class="line">		left[i] = tmp[i];</div><div class="line">	&#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">void merge_sort(int *array, int start, int end, int* tmp)</div><div class="line">&#123;</div><div class="line">	int middle = (start + end) / 2;</div><div class="line">	if(end-start &lt; 1)</div><div class="line">	&#123;</div><div class="line">		return;</div><div class="line">	&#125;</div><div class="line">	merge_sort(array, start, middle, tmp);</div><div class="line">	merge_sort(array, middle+1, end, tmp);</div><div class="line">	merge_array(&amp;array[start], middle-start+1, &amp;array[middle+1], end-middle, tmp);</div><div class="line">&#125;</div><div class="line"></div><div class="line">void sort(int* array, int len)</div><div class="line">&#123;</div><div class="line">	int tmp[ARRAYLEN] = &#123;&#125;;</div><div class="line">	merge_sort(array, 0, len-1, tmp);</div><div class="line">&#125;</div><div class="line"></div><div class="line">int main(void)</div><div class="line">&#123;</div><div class="line">	int array[ARRAYLEN] = &#123;&#125;;</div><div class="line">	int i = 0;</div><div class="line">	for(i=0; i&lt; ARRAYLEN; i++)</div><div class="line">	&#123;</div><div class="line">		scanf(&quot;%d&quot;, &amp;array[i]);</div><div class="line">	&#125;</div><div class="line">	sort(array, ARRAYLEN);</div><div class="line">	for(i=0; i&lt; ARRAYLEN; i++)</div><div class="line">	&#123;</div><div class="line">		printf(&quot;%d &quot;, array[i]);</div><div class="line">	&#125;</div><div class="line">	printf(&quot;\n&quot;);</div><div class="line">	return 0;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>桶排序<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div></pre></td><td class="code"><pre><div class="line">#include &quot;stdio.h&quot;</div><div class="line"></div><div class="line">#define ARRAYLEN 10</div><div class="line"></div><div class="line">void sort(int* array, int max, int min, int len)</div><div class="line">&#123;</div><div class="line">	int range[ARRAYLEN + 1] = &#123;&#125;;</div><div class="line">	int i = 0;</div><div class="line">	for(i=0; i&lt;len; i++)</div><div class="line">	&#123;</div><div class="line">		range[array[i] - min]++;</div><div class="line">	&#125;</div><div class="line">	int j = 0;</div><div class="line">	for(i=0; i&lt;max-min+1; i++)</div><div class="line">	&#123;</div><div class="line">		while(range[i] != 0)</div><div class="line">		&#123;</div><div class="line">			array[j++] = i+min;</div><div class="line">			range[i]--;</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">int main(void)</div><div class="line">&#123;</div><div class="line">	int array[ARRAYLEN] = &#123;&#125;;</div><div class="line">	int i = 0;</div><div class="line">	for(i=0; i&lt; ARRAYLEN; i++)</div><div class="line">	&#123;</div><div class="line">		scanf(&quot;%d&quot;, &amp;array[i]);</div><div class="line">	&#125;</div><div class="line">	sort(array, ARRAYLEN, 1, ARRAYLEN);</div><div class="line">	for(i=0; i&lt; ARRAYLEN; i++)</div><div class="line">	&#123;</div><div class="line">		printf(&quot;%d &quot;, array[i]);</div><div class="line">	&#125;</div><div class="line">	printf(&quot;\n&quot;);</div><div class="line">	return 0;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>堆排序<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div></pre></td><td class="code"><pre><div class="line">#include &quot;stdio.h&quot;</div><div class="line"></div><div class="line">#define ARRAYLEN 11</div><div class="line"></div><div class="line">void heap_adjust(int* array, int id, int size)</div><div class="line">&#123;</div><div class="line">	int lchild = id * 2;</div><div class="line">	int rchild = lchild + 1;</div><div class="line">	if(id &gt; size/2)</div><div class="line">	&#123;</div><div class="line">		return;</div><div class="line">	&#125;</div><div class="line">	int max = id;</div><div class="line">	if(lchild &lt;= size &amp;&amp; array[lchild] &gt; array[max])</div><div class="line">	&#123;</div><div class="line">		max = lchild;</div><div class="line">	&#125;</div><div class="line">	if(rchild &lt;= size &amp;&amp; array[rchild] &gt; array[max])</div><div class="line">	&#123;</div><div class="line">		max = rchild;</div><div class="line">	&#125;</div><div class="line">	if(max != id)</div><div class="line">	&#123;</div><div class="line">		int item = array[id];</div><div class="line">		array[id] = array[max];</div><div class="line">		array[max] = item;</div><div class="line">		heap_adjust(array, max, size);</div><div class="line">	&#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">void build_heap(int* array, int len)</div><div class="line">&#123;</div><div class="line">	int i = 1;</div><div class="line">	for(i=len/2; i&gt;0; i--)</div><div class="line">	&#123;</div><div class="line">		heap_adjust(array, i, len);</div><div class="line">	&#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">void sort(int* array, int len)</div><div class="line">&#123;</div><div class="line">	int i=1;</div><div class="line">	build_heap(array, len-1);</div><div class="line">	for(i=len-1;i&gt;0;i--)</div><div class="line">	&#123;</div><div class="line">		int item = array[1];</div><div class="line">		array[1] = array[i];</div><div class="line">		array[i] = item;</div><div class="line">		heap_adjust(array, 1, i-1);</div><div class="line">	&#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">int main(void)</div><div class="line">&#123;</div><div class="line">	int i = 0;</div><div class="line">	int array[ARRAYLEN] = &#123;&#125;;</div><div class="line">	for(i=1; i&lt; ARRAYLEN; i++)</div><div class="line">	&#123;</div><div class="line">		scanf(&quot;%d&quot;, &amp;array[i]);</div><div class="line">	&#125;</div><div class="line">	sort(array, ARRAYLEN);</div><div class="line">	for(i=1; i&lt; ARRAYLEN; i++)</div><div class="line">	&#123;</div><div class="line">		printf(&quot;%d &quot;, array[i]);</div><div class="line">	&#125;</div><div class="line">	printf(&quot;\n&quot;);</div><div class="line">	return 0;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>快速排序<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div></pre></td><td class="code"><pre><div class="line">#include &quot;stdio.h&quot;</div><div class="line"></div><div class="line">#define ARRAYLEN 10</div><div class="line"></div><div class="line">void sort(int* array, int len)</div><div class="line">&#123;</div><div class="line">	if(len &lt; 2)</div><div class="line">	&#123;</div><div class="line">		return;</div><div class="line">	&#125;</div><div class="line">	int start = 0;</div><div class="line">	int i = 0;</div><div class="line">	int base = array[0];</div><div class="line">	int position = 0;</div><div class="line">	int j = len-1;</div><div class="line">	while(i != j)</div><div class="line">	&#123;</div><div class="line">		while(j!=i &amp;&amp; array[j]&gt;base)</div><div class="line">		&#123;</div><div class="line">			j--;</div><div class="line">		&#125;</div><div class="line">		if(i != j)</div><div class="line">		&#123;</div><div class="line">			array[position] = array[j];</div><div class="line">			position = j;</div><div class="line">		&#125;</div><div class="line">		while(j!=i &amp;&amp; array[i]&lt;base)</div><div class="line">		&#123;</div><div class="line">			i++;</div><div class="line">		&#125;</div><div class="line">		if(i!=j)</div><div class="line">		&#123;</div><div class="line">			array[position] = array[i];</div><div class="line">			position = i;</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">	array[position] = base;</div><div class="line">	sort(array, position+1);</div><div class="line">	sort(&amp;array[position+1], len-position-1);</div><div class="line">&#125;</div><div class="line"></div><div class="line">int main(void)</div><div class="line">&#123;</div><div class="line">	int array[ARRAYLEN] = &#123;&#125;;</div><div class="line">	int i = 0;</div><div class="line">	for(i=0; i&lt; ARRAYLEN; i++)</div><div class="line">	&#123;</div><div class="line">		scanf(&quot;%d&quot;, &amp;array[i]);</div><div class="line">	&#125;</div><div class="line">	sort(array, ARRAYLEN);</div><div class="line">	for(i=0; i&lt; ARRAYLEN; i++)</div><div class="line">	&#123;</div><div class="line">		printf(&quot;%d &quot;, array[i]);</div><div class="line">	&#125;</div><div class="line">	printf(&quot;\n&quot;);</div><div class="line">	return 0;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="http://mreleven.com/2014/12/06/GDB一些常用的命令/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1414,6 +1271,149 @@ jr    $ra                # 将控制权转移给调用者
 <p>p(print) 输出一个变量。p a输出a的值。</p>
 <p>clear 清除所有断点。</p>
 <p>基本上目前常用点的都在上面了。</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://mreleven.com/2014/12/06/集齐7种排序算法召唤神猿/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Mr.Eleven">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://mreleven.oss-cn-hangzhou.aliyuncs.com/blog/270356B2-2258-4753-AC46-0A4CEC06DF78.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Eleven's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2014/12/06/集齐7种排序算法召唤神猿/" itemprop="url">集齐7种排序算法召唤神猿</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2014-12-06T00:00:00+08:00">
+                2014-12-06
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/算法/" itemprop="url" rel="index">
+                    <span itemprop="name">算法</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>俗话说得好，连7种基本的排序算法都没学会，还想找女朋友？好吧，还是乖乖回去写排序吧。</p>
+<p>排序有很多种。最常用的就这7种：插入排序，冒泡排序，选择排序，归并排序，桶排序，堆排序，快速排序。</p>
+<p>插入排序：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div></pre></td><td class="code"><pre><div class="line">#include &quot;stdio.h&quot;</div><div class="line"></div><div class="line">#define ARRAYLEN 10</div><div class="line"></div><div class="line">void sort(int* array, int len)</div><div class="line">&#123;</div><div class="line">	int i = 0;</div><div class="line">	for(i=1; i&lt;len; i++)</div><div class="line">	&#123;</div><div class="line">		int base = array[i];</div><div class="line">		int j = i;</div><div class="line">		for(j=i-1;j&gt;=0;j--)</div><div class="line">		&#123;</div><div class="line">			if(array[j] &gt; base)</div><div class="line">			&#123;</div><div class="line">				array[j+1] = array[j];</div><div class="line">			&#125;</div><div class="line">			else</div><div class="line">			&#123;</div><div class="line">				array[j+1] = base;</div><div class="line">				break;</div><div class="line">			&#125;</div><div class="line">		&#125;</div><div class="line">		if(j == -1)</div><div class="line">		&#123;</div><div class="line">			array[0] = base;</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">int main(void)</div><div class="line">&#123;</div><div class="line">	int array[ARRAYLEN] = &#123;&#125;;</div><div class="line">	int i = 0;</div><div class="line">	for(i=0; i&lt; ARRAYLEN; i++)</div><div class="line">	&#123;</div><div class="line">		scanf(&quot;%d&quot;, &amp;array[i]);</div><div class="line">	&#125;</div><div class="line">	sort(array, ARRAYLEN);</div><div class="line">	for(i=0; i&lt; ARRAYLEN; i++)</div><div class="line">	&#123;</div><div class="line">		printf(&quot;%d &quot;, array[i]);</div><div class="line">	&#125;</div><div class="line">	printf(&quot;\n&quot;);</div><div class="line">	return 0;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>选择排序：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div></pre></td><td class="code"><pre><div class="line">#include &quot;stdio.h&quot;</div><div class="line"></div><div class="line">#define ARRAYLEN 10</div><div class="line"></div><div class="line">void sort(int* array, int len)</div><div class="line">&#123;</div><div class="line">	int i = 0;</div><div class="line">	for(i=0; i&lt;len; i++)</div><div class="line">	&#123;</div><div class="line">		int j = 0;</div><div class="line">		int min = i;</div><div class="line">		for(j=i; j&lt;len; j++)</div><div class="line">		&#123;</div><div class="line">			if(array[min] &gt; array[j])</div><div class="line">			&#123;</div><div class="line">				min = j;</div><div class="line">			&#125;</div><div class="line">		&#125;</div><div class="line">		if(min != j)</div><div class="line">		&#123;</div><div class="line">			int item = array[min];</div><div class="line">			array[min] = array[i];</div><div class="line">			array[i] = item;</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">int main(void)</div><div class="line">&#123;</div><div class="line">	int array[ARRAYLEN] = &#123;&#125;;</div><div class="line">	int i = 0;</div><div class="line">	for(i=0; i&lt; ARRAYLEN; i++)</div><div class="line">	&#123;</div><div class="line">		scanf(&quot;%d&quot;, &amp;array[i]);</div><div class="line">	&#125;</div><div class="line">	sort(array, ARRAYLEN);</div><div class="line">	for(i=0; i&lt; ARRAYLEN; i++)</div><div class="line">	&#123;</div><div class="line">		printf(&quot;%d &quot;, array[i]);</div><div class="line">	&#125;</div><div class="line">	printf(&quot;\n&quot;);</div><div class="line">	return 0;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>冒泡排序：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div></pre></td><td class="code"><pre><div class="line">#include &quot;stdio.h&quot;</div><div class="line"></div><div class="line">#define ARRAYLEN 10</div><div class="line"></div><div class="line">void sort(int* array, int len)</div><div class="line">&#123;</div><div class="line">	int i = 0;</div><div class="line">	int j = 0;</div><div class="line">	for(i=len-1; i&gt;0; i--)</div><div class="line">	&#123;</div><div class="line">		for(j=0; j&lt;i; j++)</div><div class="line">		&#123;</div><div class="line">			if(array[j] &gt; array[j+1])</div><div class="line">			&#123;</div><div class="line">				int item = array[j];</div><div class="line">				array[j] = array[j+1];</div><div class="line">				array[j+1] = item;</div><div class="line">			&#125;</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">int main(void)</div><div class="line">&#123;</div><div class="line">	int array[ARRAYLEN] = &#123;&#125;;</div><div class="line">	int i = 0;</div><div class="line">	for(i=0; i&lt; ARRAYLEN; i++)</div><div class="line">	&#123;</div><div class="line">		scanf(&quot;%d&quot;, &amp;array[i]);</div><div class="line">	&#125;</div><div class="line">	sort(array, ARRAYLEN);</div><div class="line">	for(i=0; i&lt; ARRAYLEN; i++)</div><div class="line">	&#123;</div><div class="line">		printf(&quot;%d &quot;, array[i]);</div><div class="line">	&#125;</div><div class="line">	printf(&quot;\n&quot;);</div><div class="line">	return 0;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>归并排序：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div></pre></td><td class="code"><pre><div class="line">#include &quot;stdio.h&quot;</div><div class="line"></div><div class="line">#define ARRAYLEN 10</div><div class="line"></div><div class="line">void merge_array(int* left, int len_left, int* right, int len_right, int* tmp)</div><div class="line">&#123;</div><div class="line">	int i = 0;</div><div class="line">	int j = 0;</div><div class="line">	int k = 0;</div><div class="line">	while(i&lt;len_left &amp;&amp; j&lt;len_right)</div><div class="line">	&#123;</div><div class="line">		if(left[i]&lt; right[j])</div><div class="line">		&#123;</div><div class="line">			tmp[k++] = left[i++];</div><div class="line">		&#125;</div><div class="line">		else</div><div class="line">		&#123;</div><div class="line">			tmp[k++] = right[j++];</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">	while(i &lt; len_left)</div><div class="line">	&#123;</div><div class="line">		tmp[k++] = left[i++];</div><div class="line">	&#125;</div><div class="line">	while(j &lt; len_right)</div><div class="line">	&#123;</div><div class="line">		tmp[k++] = right[j++];</div><div class="line">	&#125;</div><div class="line">	for(i=0;i&lt;k;i++)</div><div class="line">	&#123;</div><div class="line">		left[i] = tmp[i];</div><div class="line">	&#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">void merge_sort(int *array, int start, int end, int* tmp)</div><div class="line">&#123;</div><div class="line">	int middle = (start + end) / 2;</div><div class="line">	if(end-start &lt; 1)</div><div class="line">	&#123;</div><div class="line">		return;</div><div class="line">	&#125;</div><div class="line">	merge_sort(array, start, middle, tmp);</div><div class="line">	merge_sort(array, middle+1, end, tmp);</div><div class="line">	merge_array(&amp;array[start], middle-start+1, &amp;array[middle+1], end-middle, tmp);</div><div class="line">&#125;</div><div class="line"></div><div class="line">void sort(int* array, int len)</div><div class="line">&#123;</div><div class="line">	int tmp[ARRAYLEN] = &#123;&#125;;</div><div class="line">	merge_sort(array, 0, len-1, tmp);</div><div class="line">&#125;</div><div class="line"></div><div class="line">int main(void)</div><div class="line">&#123;</div><div class="line">	int array[ARRAYLEN] = &#123;&#125;;</div><div class="line">	int i = 0;</div><div class="line">	for(i=0; i&lt; ARRAYLEN; i++)</div><div class="line">	&#123;</div><div class="line">		scanf(&quot;%d&quot;, &amp;array[i]);</div><div class="line">	&#125;</div><div class="line">	sort(array, ARRAYLEN);</div><div class="line">	for(i=0; i&lt; ARRAYLEN; i++)</div><div class="line">	&#123;</div><div class="line">		printf(&quot;%d &quot;, array[i]);</div><div class="line">	&#125;</div><div class="line">	printf(&quot;\n&quot;);</div><div class="line">	return 0;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>桶排序<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div></pre></td><td class="code"><pre><div class="line">#include &quot;stdio.h&quot;</div><div class="line"></div><div class="line">#define ARRAYLEN 10</div><div class="line"></div><div class="line">void sort(int* array, int max, int min, int len)</div><div class="line">&#123;</div><div class="line">	int range[ARRAYLEN + 1] = &#123;&#125;;</div><div class="line">	int i = 0;</div><div class="line">	for(i=0; i&lt;len; i++)</div><div class="line">	&#123;</div><div class="line">		range[array[i] - min]++;</div><div class="line">	&#125;</div><div class="line">	int j = 0;</div><div class="line">	for(i=0; i&lt;max-min+1; i++)</div><div class="line">	&#123;</div><div class="line">		while(range[i] != 0)</div><div class="line">		&#123;</div><div class="line">			array[j++] = i+min;</div><div class="line">			range[i]--;</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">int main(void)</div><div class="line">&#123;</div><div class="line">	int array[ARRAYLEN] = &#123;&#125;;</div><div class="line">	int i = 0;</div><div class="line">	for(i=0; i&lt; ARRAYLEN; i++)</div><div class="line">	&#123;</div><div class="line">		scanf(&quot;%d&quot;, &amp;array[i]);</div><div class="line">	&#125;</div><div class="line">	sort(array, ARRAYLEN, 1, ARRAYLEN);</div><div class="line">	for(i=0; i&lt; ARRAYLEN; i++)</div><div class="line">	&#123;</div><div class="line">		printf(&quot;%d &quot;, array[i]);</div><div class="line">	&#125;</div><div class="line">	printf(&quot;\n&quot;);</div><div class="line">	return 0;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>堆排序<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div></pre></td><td class="code"><pre><div class="line">#include &quot;stdio.h&quot;</div><div class="line"></div><div class="line">#define ARRAYLEN 11</div><div class="line"></div><div class="line">void heap_adjust(int* array, int id, int size)</div><div class="line">&#123;</div><div class="line">	int lchild = id * 2;</div><div class="line">	int rchild = lchild + 1;</div><div class="line">	if(id &gt; size/2)</div><div class="line">	&#123;</div><div class="line">		return;</div><div class="line">	&#125;</div><div class="line">	int max = id;</div><div class="line">	if(lchild &lt;= size &amp;&amp; array[lchild] &gt; array[max])</div><div class="line">	&#123;</div><div class="line">		max = lchild;</div><div class="line">	&#125;</div><div class="line">	if(rchild &lt;= size &amp;&amp; array[rchild] &gt; array[max])</div><div class="line">	&#123;</div><div class="line">		max = rchild;</div><div class="line">	&#125;</div><div class="line">	if(max != id)</div><div class="line">	&#123;</div><div class="line">		int item = array[id];</div><div class="line">		array[id] = array[max];</div><div class="line">		array[max] = item;</div><div class="line">		heap_adjust(array, max, size);</div><div class="line">	&#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">void build_heap(int* array, int len)</div><div class="line">&#123;</div><div class="line">	int i = 1;</div><div class="line">	for(i=len/2; i&gt;0; i--)</div><div class="line">	&#123;</div><div class="line">		heap_adjust(array, i, len);</div><div class="line">	&#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">void sort(int* array, int len)</div><div class="line">&#123;</div><div class="line">	int i=1;</div><div class="line">	build_heap(array, len-1);</div><div class="line">	for(i=len-1;i&gt;0;i--)</div><div class="line">	&#123;</div><div class="line">		int item = array[1];</div><div class="line">		array[1] = array[i];</div><div class="line">		array[i] = item;</div><div class="line">		heap_adjust(array, 1, i-1);</div><div class="line">	&#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">int main(void)</div><div class="line">&#123;</div><div class="line">	int i = 0;</div><div class="line">	int array[ARRAYLEN] = &#123;&#125;;</div><div class="line">	for(i=1; i&lt; ARRAYLEN; i++)</div><div class="line">	&#123;</div><div class="line">		scanf(&quot;%d&quot;, &amp;array[i]);</div><div class="line">	&#125;</div><div class="line">	sort(array, ARRAYLEN);</div><div class="line">	for(i=1; i&lt; ARRAYLEN; i++)</div><div class="line">	&#123;</div><div class="line">		printf(&quot;%d &quot;, array[i]);</div><div class="line">	&#125;</div><div class="line">	printf(&quot;\n&quot;);</div><div class="line">	return 0;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>快速排序<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div></pre></td><td class="code"><pre><div class="line">#include &quot;stdio.h&quot;</div><div class="line"></div><div class="line">#define ARRAYLEN 10</div><div class="line"></div><div class="line">void sort(int* array, int len)</div><div class="line">&#123;</div><div class="line">	if(len &lt; 2)</div><div class="line">	&#123;</div><div class="line">		return;</div><div class="line">	&#125;</div><div class="line">	int start = 0;</div><div class="line">	int i = 0;</div><div class="line">	int base = array[0];</div><div class="line">	int position = 0;</div><div class="line">	int j = len-1;</div><div class="line">	while(i != j)</div><div class="line">	&#123;</div><div class="line">		while(j!=i &amp;&amp; array[j]&gt;base)</div><div class="line">		&#123;</div><div class="line">			j--;</div><div class="line">		&#125;</div><div class="line">		if(i != j)</div><div class="line">		&#123;</div><div class="line">			array[position] = array[j];</div><div class="line">			position = j;</div><div class="line">		&#125;</div><div class="line">		while(j!=i &amp;&amp; array[i]&lt;base)</div><div class="line">		&#123;</div><div class="line">			i++;</div><div class="line">		&#125;</div><div class="line">		if(i!=j)</div><div class="line">		&#123;</div><div class="line">			array[position] = array[i];</div><div class="line">			position = i;</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">	array[position] = base;</div><div class="line">	sort(array, position+1);</div><div class="line">	sort(&amp;array[position+1], len-position-1);</div><div class="line">&#125;</div><div class="line"></div><div class="line">int main(void)</div><div class="line">&#123;</div><div class="line">	int array[ARRAYLEN] = &#123;&#125;;</div><div class="line">	int i = 0;</div><div class="line">	for(i=0; i&lt; ARRAYLEN; i++)</div><div class="line">	&#123;</div><div class="line">		scanf(&quot;%d&quot;, &amp;array[i]);</div><div class="line">	&#125;</div><div class="line">	sort(array, ARRAYLEN);</div><div class="line">	for(i=0; i&lt; ARRAYLEN; i++)</div><div class="line">	&#123;</div><div class="line">		printf(&quot;%d &quot;, array[i]);</div><div class="line">	&#125;</div><div class="line">	printf(&quot;\n&quot;);</div><div class="line">	return 0;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
 
           
         
