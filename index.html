@@ -256,6 +256,253 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://mreleven.com/2017/09/20/记一次故障/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Mr.Eleven">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://mreleven.oss-cn-hangzhou.aliyuncs.com/blog/270356B2-2258-4753-AC46-0A4CEC06DF78.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Eleven's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/09/20/记一次故障/" itemprop="url">记一次故障</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-09-20T22:40:22+08:00">
+                2017-09-20
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>上周发生了一次故障，新手任务中的首购理财没有成功。原因很简单，错误地使用了java中的equals方法T^T。</p>
+<h6 id="这是java-lang-Long的equals源码。"><a href="#这是java-lang-Long的equals源码。" class="headerlink" title="这是java.lang.Long的equals源码。"></a>这是java.lang.Long的equals源码。</h6><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">equals</span><span class="params">(Object obj)</span> </span>&#123;</div><div class="line">        <span class="keyword">if</span> (obj <span class="keyword">instanceof</span> Long) &#123;</div><div class="line">            <span class="keyword">return</span> value == ((Long)obj).intValue();</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> <span class="keyword">false</span>;</div><div class="line">    &#125;</div></pre></td></tr></table></figure>
+<p>而这次故障的原因是我把一个Long对象和Integer对象用equals进行比较。<br>关于 == 与 euqlas的选择<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div></pre></td><td class="code"><pre><div class="line">public static void main(String args[]) &#123;</div><div class="line">        Long aLong = 10086L;</div><div class="line">        Long bLong = 10086L;</div><div class="line">        Integer aInt = 10086;</div><div class="line">        Integer bInt = 10086;</div><div class="line">        int a = 10086;</div><div class="line">        int b = 10086;</div><div class="line">        long al = 10086L;</div><div class="line">        long bl = 10086L;</div><div class="line">        // 包装类型与包装类型比较，原生类型与原生类型比较</div><div class="line">        System.out.println(&quot;aLong == bLong is &quot; + String.valueOf(aLong == bLong));</div><div class="line">        System.out.println(&quot;aInt == bInt is &quot; + String.valueOf(aInt == bInt));</div><div class="line">        System.out.println(&quot;a == b is &quot; + String.valueOf(a == b));</div><div class="line">        System.out.println(&quot;al == bl is &quot; + String.valueOf(al == bl));</div><div class="line">        System.out.println(&quot;aLong.equals(bLong) is &quot; + String.valueOf(aLong.equals(bLong)));</div><div class="line">        System.out.println(&quot;aInt.equals(bInt) is &quot; + String.valueOf(aInt.equals(bInt)));</div><div class="line"></div><div class="line">        // 同样的精度不同类型比较</div><div class="line">        System.out.println(&quot;aLong == al is &quot; + String.valueOf(aLong == al));</div><div class="line">        System.out.println(&quot;aInt == a is &quot; + String.valueOf(aInt == a));</div><div class="line">        System.out.println(&quot;aLong.equals(al) is &quot; + String.valueOf(aLong.equals(al)));</div><div class="line">        System.out.println(&quot;aInt.equals(a) is &quot; + String.valueOf(aInt.equals(a)));</div><div class="line"></div><div class="line">        // 不同精度同样类型比较</div><div class="line">        // System.out.println(&quot;aLong == aInt is &quot; + String.valueOf(aLong == aInt)); 编译错误</div><div class="line">        System.out.println(&quot;al == a is &quot; + String.valueOf(al == a));</div><div class="line">        System.out.println(&quot;aLong.equals(aInt) is &quot; + String.valueOf(aLong.equals(aInt)));</div><div class="line"></div><div class="line">        // 不同精度不同类型</div><div class="line">        System.out.println(&quot;aLong == a is &quot; + String.valueOf(aLong == a));</div><div class="line">        System.out.println(&quot;aInt == al is &quot; + String.valueOf(aInt == al));</div><div class="line">        System.out.println(&quot;aLong.equals(a) is &quot; + String.valueOf(aLong.equals(a)));</div><div class="line">        System.out.println(&quot;aInt.equals(al) is &quot; + String.valueOf(aInt.equals(al)));</div><div class="line">    &#125;</div></pre></td></tr></table></figure></p>
+<p>执行结果是这个样子的：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">aLong == bLong is false</div><div class="line">aInt == bInt is false</div><div class="line">a == b is true</div><div class="line">al == bl is true</div><div class="line">aLong.equals(bLong) is true</div><div class="line">aInt.equals(bInt) is true</div><div class="line">aLong == al is true</div><div class="line">aInt == a is true</div><div class="line">aLong.equals(al) is true</div><div class="line">aInt.equals(a) is true</div><div class="line">al == a is true</div><div class="line">aLong.equals(aInt) is false</div><div class="line">aLong == a is true</div><div class="line">aInt == al is true</div><div class="line">aLong.equals(a) is false</div><div class="line">aInt.equals(al) is false</div></pre></td></tr></table></figure></p>
+<p>总结一下：</p>
+<ul>
+<li>只要有原生类型参与的比较，都用 “==”。(只要有原生类型参与，那么就会有自动拆箱的操作)</li>
+<li>如果是精度相同用equals。(Long和long，Integer和int) </li>
+<li>如果精度不相同，也没有原生类型参与，那么应该这么写：l == null ? i == null : ObjectUtils.equals(l.intValue(), i)。</li>
+</ul>
+<p>PS: 其实我觉得以后不用int和Integer类型，全部都用Long和long可以避免踩这个坑。</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://mreleven.com/2017/09/18/SonarQube分享/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Mr.Eleven">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://mreleven.oss-cn-hangzhou.aliyuncs.com/blog/270356B2-2258-4753-AC46-0A4CEC06DF78.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Eleven's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/09/18/SonarQube分享/" itemprop="url">SonarQube分享</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-09-18T22:20:01+08:00">
+                2017-09-18
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="SonarQube"><a href="#SonarQube" class="headerlink" title="SonarQube"></a>SonarQube</h2><ol>
+<li>苹果手机</li>
+</ol>
+<h2 id="Unittest"><a href="#Unittest" class="headerlink" title="Unittest"></a>Unittest</h2><h4 id="单元测试的好处。"><a href="#单元测试的好处。" class="headerlink" title="单元测试的好处。"></a>单元测试的好处。</h4><ol>
+<li>程序员如何提高自信。</li>
+<li></li>
+</ol>
+<h3 id="How-to-write-Unittest。"><a href="#How-to-write-Unittest。" class="headerlink" title="How to write Unittest。"></a>How to write Unittest。</h3><ol>
+<li>单元测试走不走DB？</li>
+<li>SpringBoot中的单元测试</li>
+<li>单元测试依赖第三方服务怎么办。</li>
+<li>异常超时等情况不容易模拟。</li>
+<li>断点与跟踪。</li>
+</ol>
+<h3 id="Unittest-In-Wacai-com"><a href="#Unittest-In-Wacai-com" class="headerlink" title="Unittest In Wacai.com"></a>Unittest In Wacai.com</h3>
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="http://mreleven.com/2017/09/10/关于RSA算法/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1196,329 +1443,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://mreleven.com/2017/04/19/一个合格的程序员/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Mr.Eleven">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="http://mreleven.oss-cn-hangzhou.aliyuncs.com/blog/270356B2-2258-4753-AC46-0A4CEC06DF78.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Eleven's blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/04/19/一个合格的程序员/" itemprop="url">一个合格的程序员</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-04-19T00:00:00+08:00">
-                2017-04-19
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/思考/" itemprop="url" rel="index">
-                    <span itemprop="name">思考</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="我心目中的一个合格的程序员的品质"><a href="#我心目中的一个合格的程序员的品质" class="headerlink" title="我心目中的一个合格的程序员的品质"></a>我心目中的一个合格的程序员的品质</h2><h3 id="提测前的check-list"><a href="#提测前的check-list" class="headerlink" title="提测前的check list:"></a>提测前的check list:</h3><ul>
-<li>单元测试覆盖度是否达到80%。</li>
-<li>每个变量的命名是否合理，是否需要重构。</li>
-<li>测试和线上的配置文件是否准备好了。</li>
-<li>线上环境和测试环境的不一致性，多台机器，微服务的健康检查，url和域名是否需要修改。</li>
-<li>检查线上数据库，新增状态是否原本就存在。</li>
-<li>是否所有sql都命中索引。</li>
-<li>数据库建表语句的每个字段类型和注释是否都合理。</li>
-<li>Sonarqube上代码的可靠性，安全性，可维护性是否达到A标准。</li>
-</ul>
-<h3 id="思想觉悟"><a href="#思想觉悟" class="headerlink" title="思想觉悟"></a>思想觉悟</h3><ul>
-<li>代码大部分时候是用来维护的，而不是用来实现功能的。</li>
-<li>绝对清晰，是风格上唯一的美。</li>
-<li>当你真正想要完成一件事情的时候，你是不会在意你是产品，还是开发，还是设计。</li>
-<li>当你在做一个项目的时候，你要把自己想象成是在造一台兰博基尼。</li>
-<li>认真对待每一个error日志。</li>
-</ul>
-<h3 id="经验"><a href="#经验" class="headerlink" title="经验"></a>经验</h3><ul>
-<li>没事千万不要写void函数，一个方法体没有任何反馈信息会增加测试难度。</li>
-</ul>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://mreleven.com/2017/04/05/spring中的环境/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Mr.Eleven">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="http://mreleven.oss-cn-hangzhou.aliyuncs.com/blog/270356B2-2258-4753-AC46-0A4CEC06DF78.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Eleven's blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/04/05/spring中的环境/" itemprop="url">spring中的环境Enviroment</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-04-05T00:00:00+08:00">
-                2017-04-05
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/spring源码/" itemprop="url" rel="index">
-                    <span itemprop="name">spring源码</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>上周清明节在家没事看了一会spring的源码。主要是spring-core中的env模块。</p>
-<p><img src="http://cdn.eleven.name/blog/post/屏幕快照 2017-04-05 下午11.48.07.png" width="800"></p>
-<p>spring运行的环境主要包含两个方面，一个是环境中设置的属性信息，一个是profile。</p>
-<p>属性信息就是通过application.properties或者通过命令行启动时候用–attr=value启动的一些参数。</p>
-<p>profile表示环境中哪些bean是当前进程加载的。(我一般用profile来配置测试/开发/预发/生产环境)。</p>
-<p>这个模块中最基本的一个抽象类是PropertySource，一个嘴基本的接口是PropertyResolver。</p>
-<p>PropertySource是属性的载体，而PropertyResolver是对PropertySource使用工具。两者组合完成了所有对属性的解析，包括对${}占位符的自动解析。</p>
-<p>Enviroment在继承PropertyResolver的同时，还增加了对Profile的管理。Enviroment是ApplicationContext中很重要的一部分。</p>
-<p>一下是我对这几个类或借口的理解</p>
-<ul>
-<li><p>PropertySource：属性集合。比如可以代表名称为systemProperties 的系统自带属性集合。</p>
-</li>
-<li><p>EnumerablePropertySource：封装了PropertySource的使用，通过一个getPropertyNames方法获取所有的属性名的方式来使用。</p>
-</li>
-<li>MapPropertySource：一个真实可用的PropertySource，只不过规定PropertySource的source必须是Map类型。</li>
-<li>PropertiesPropertySource：继承MapPropertySource，规定source必须是Properties类型。</li>
-<li>SystemEnvironmentPropertySource：这是MapPropertySource的一种特殊实现，专门用于配置Enviroment，这个类增加了shell环境中对一些特殊符号的兼容。</li>
-<li>CommandLinePropertySource：比较普通，抽象了通过命令行设置的属性源，包含了option arguments和non-option arguments。</li>
-<li>SimpleCommandLinePropertySource：CommandLinePropertySource的一个简单实现。</li>
-<li>CommandLineArgs：命令行参数的抽象。</li>
-<li>SimpleCommandLineArgsParser：命令行参数解析器。</li>
-<li>CompositePropertySource：组合属性源，可以把多个propertySource组合成一个属性源来使用。</li>
-<li>PropertySources：多个PropertySource组合在一起，但不是PropertySource。</li>
-<li>MutablePropertySources：PropertySources的默认实现。</li>
-<li>PropertyResolver：属性解析器借口。包括属性的获取和占位符的解析。</li>
-<li>ConfigurablePropertyResolver：可配置的属性解析器，允许配置属性占位符的分隔符和前缀后缀，也能配置属性类型转换器。</li>
-<li>AbstractPropertyResolver：属性解析器的抽象实现，没什么特殊的。</li>
-<li>MissingRequiredPropertiesException：必要属性的不存在时抛的异常。</li>
-<li>PropertyPlaceholderHelper：解析属性占位符的具体算法。</li>
-<li>PropertySourcesPropertyResolver：PropertyResolver的唯一一个实现。</li>
-<li>Environment：在PropertyResolver的基础上加上了获取profile相关的操作。</li>
-<li>ConfigurableEnvironment：增加了设置profile的操作。</li>
-<li>AbstractEnvironment：Enviroment的抽象基类。实现了一些简单的操作profile和propertySource的接口。</li>
-<li>StandardEnvironment：标准环境类，在抽象基类的基础上修改了增加MapPropertySource和SystemEnvironmentPropertySource的行为。</li>
-<li>EnvironmentCapable：只定义了一个接口用于获取环境对象。</li>
-<li>ReadOnlySystemAttributesMap：只读属性。其实只是个readonly的map。</li>
-</ul>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1569,7 +1493,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">38</span>
+                <span class="site-state-item-count">40</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
