@@ -100,7 +100,7 @@
 <meta property="og:url" content="http://mreleven.com/2017/01/19/让我们一起加入这万米云端的历险！！！/index.html">
 <meta property="og:site_name" content="Eleven&#39;s blog">
 <meta property="og:description" content="标题是在李鼎大大博客中看到的《准备一个安全可靠的发布流程》文章中的一句话，挺适合用来形容一次大版本发布这个情形的。昨天是2017年最后一次大版本发布，可谓是障碍重重。发布的项目比较多，而且整个项目的开发时间很赶，作为项目开发者的自己底气都不是很足。包含大量配置，无法线上回归，发布流程整整写了两页。 发布流程梳理： 起飞前的准备 申请线上的机器和域名。 确定项目线上机器的ip，确保有登录权限。 确定">
-<meta property="og:updated_time" content="2017-08-08T07:46:27.000Z">
+<meta property="og:updated_time" content="2017-10-30T08:26:24.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="让我们一起加入这万米云端的历险！！">
 <meta name="twitter:description" content="标题是在李鼎大大博客中看到的《准备一个安全可靠的发布流程》文章中的一句话，挺适合用来形容一次大版本发布这个情形的。昨天是2017年最后一次大版本发布，可谓是障碍重重。发布的项目比较多，而且整个项目的开发时间很赶，作为项目开发者的自己底气都不是很足。包含大量配置，无法线上回归，发布流程整整写了两页。 发布流程梳理： 起飞前的准备 申请线上的机器和域名。 确定项目线上机器的ip，确保有登录权限。 确定">
@@ -349,6 +349,7 @@
 <li>确定项目线上机器的ip，确保有登录权限。</li>
 <li>确定线上的域名。</li>
 <li>创建数据库表。修改数据库表结构。(尽量不要涉及删除字段这种情况)</li>
+<li>创建对应的kafka topic，以及influxdb对应的数据库。</li>
 <li>初始化表数据(分部有依赖的情况需要留到发布中)。</li>
 <li>打正式包，发布到线上仓库，将依赖项目的版本号升级。</li>
 <li>代码合并到发布分支。保存当前线上代码的分支用于回滚。</li>
@@ -492,7 +493,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">40</span>
+                <span class="site-state-item-count">41</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
