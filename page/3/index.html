@@ -256,6 +256,291 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://mreleven.com/2016/03/16/scheme/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Mr.Eleven">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://mreleven.oss-cn-hangzhou.aliyuncs.com/blog/270356B2-2258-4753-AC46-0A4CEC06DF78.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Eleven's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2016/03/16/scheme/" itemprop="url">scheme牛顿迭代</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-03-16T00:00:00+08:00">
+                2016-03-16
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/scheme/" itemprop="url" rel="index">
+                    <span itemprop="name">scheme</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <ul>
+<li>求平方根</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div></pre></td><td class="code"><pre><div class="line">(define (square x) (* x x))</div><div class="line"></div><div class="line">(square 2)</div><div class="line"></div><div class="line">(define (abs x)</div><div class="line">  (if (&lt; x 0) (- x) x)</div><div class="line">  )</div><div class="line"></div><div class="line">(abs -1)</div><div class="line"></div><div class="line">;;(define (goodenough guess x)</div><div class="line">;;  (&lt; (abs (- (square guess) x)) 0.0001))</div><div class="line"></div><div class="line">(define (goodenough guess x)</div><div class="line">  (&lt; (abs (- (/ guess (average guess (/ x guess))) 1)) 0.01))</div><div class="line"></div><div class="line">(goodenough 3 9)</div><div class="line"></div><div class="line">(define (average a b)</div><div class="line">  (/ (+ a b) 2))</div><div class="line"></div><div class="line">(average 9 3)</div><div class="line"></div><div class="line">(define (sqrt-iter guess x)</div><div class="line">  (if (goodenough guess x) guess (sqrt-iter (average guess (/ x guess)) x))</div><div class="line">  )</div><div class="line"></div><div class="line">(sqrt-iter 1.0 9)</div><div class="line"></div><div class="line">(define (sqrt x) (sqrt-iter 1.0 x))</div><div class="line"></div><div class="line">(sqrt 9)</div></pre></td></tr></table></figure>
+<ul>
+<li>求立方根</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div></pre></td><td class="code"><pre><div class="line">(define (square x) (* x x))</div><div class="line"></div><div class="line">(square 2)</div><div class="line"></div><div class="line">(define (cube x) (* x x x))</div><div class="line"></div><div class="line">(cubert 2)</div><div class="line"></div><div class="line">(define (abs x)</div><div class="line">  (if (&lt; x 0) (- x) x)</div><div class="line">  )</div><div class="line"></div><div class="line">(abs -1)</div><div class="line">(abs 1)</div><div class="line"></div><div class="line">(define (goodenough guess x)</div><div class="line">  (&lt; (abs (- (/ guess (improve guess x)) 1)) 0.01))</div><div class="line"></div><div class="line">(goodenough 3 9)</div><div class="line"></div><div class="line">(define (improve guess x)</div><div class="line">  (/ (+ (/ x (square guess)) (* 2 guess)) 3))</div><div class="line"></div><div class="line">(improve 1.0 9)</div><div class="line"></div><div class="line">(define (average a b)</div><div class="line">  (/ (+ a b) 2))</div><div class="line"></div><div class="line">(average 9 3)</div><div class="line"></div><div class="line">(define (cubert-iter guess x)</div><div class="line">  (if (goodenough guess x) guess (cubert-iter (improve guess x) x))</div><div class="line">  )</div><div class="line"></div><div class="line">(cubert-iter 2.0 27)</div><div class="line"></div><div class="line">(define (cubert x) (cubert-iter 1.0 x))</div><div class="line"></div><div class="line">(cubert 27)</div></pre></td></tr></table></figure>
+<p>推荐一首好听个歌给大家，希望大家都能成为自己的<a href="http://music.163.com/#/share/48321992/243390710" target="_blank" rel="external">Best Of Me</a></p>
+<p><img style="width:200px;height: 200px;" src="http://mreleven.oss-cn-hangzhou.aliyuncs.com/blog/s6833645.jpg"></p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://mreleven.com/2016/03/12/关于值与引用/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Mr.Eleven">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://mreleven.oss-cn-hangzhou.aliyuncs.com/blog/270356B2-2258-4753-AC46-0A4CEC06DF78.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Eleven's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2016/03/12/关于值与引用/" itemprop="url">关于值与引用</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-03-12T00:00:00+08:00">
+                2016-03-12
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/java/" itemprop="url" rel="index">
+                    <span itemprop="name">java</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>自从到了新公司，就开始了苦逼的java学习。新公司忙成🐶，每天基本上都是10点左右才离开公司。</p>
+<p>今天感冒请假在家，想到自己已经很长时间没有学习了。不学习就不会成长，毕竟大杭州90%公司的核心开发语言都是Java，于是在知乎上找各位大牛的Java学习路线，发现了之前有个一直不适很清楚的概念，Java中的值传递和引用传递。</p>
+<ul>
+<li>关于值类型和引用类型。值类型是java中所有的基本类型，而引用类型是指对象类型。(Integer和Long这种包装器也是引用类型，只是他们在某些情况下编译器中会转化成它包装的基本类型)。用来区分引用类型和值类型只有一个标准，它的内存分配是在堆上还是在栈上。</li>
+<li>mutate和change，mutate表示堆上内存的改变，change表示变量名重新指到一个新的内存地址，原本指向的内容不变。</li>
+<li>值传递与引用传递。函数调用参数传递本身都是值的传递，值类型传递一份本身的拷贝，引用类型传递一份引用的地址拷贝。由于函数调用会创建新的栈帧，所以形参的作用域只是函数内部，对形参变量名的赋值不会对函数之外产生影响，所以我们永远也无法在函数内改变函数外的实参的引用地址。所以我们只能对实参进行mutate操作，不能进行change操作。</li>
+</ul>
+<p>不扯淡，睡觉了。<a href="https://www.zhihu.com/question/20628016" target="_blank" rel="external">知乎原文地址</a></p>
+<p>明天回来看闭包。 <a href="https://www.zhihu.com/question/27460623/answer/36747015" target="_blank" rel="external">first class function</a></p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="http://mreleven.com/2015/07/19/Explain命令/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1548,291 +1833,6 @@ jr    $ra                # 将控制权转移给调用者
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://mreleven.com/2014/12/14/计算机中补码到底解决了什么问题/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Mr.Eleven">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="http://mreleven.oss-cn-hangzhou.aliyuncs.com/blog/270356B2-2258-4753-AC46-0A4CEC06DF78.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Eleven's blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2014/12/14/计算机中补码到底解决了什么问题/" itemprop="url">计算机中补码到底解决了什么问题</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2014-12-14T00:00:00+08:00">
-                2014-12-14
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/基础/" itemprop="url" rel="index">
-                    <span itemprop="name">基础</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p> 大学的时候计算机组成原理曾经说过原码，反码，补码这三种整数的表示类型。那个时候2B一样，只知道通过这些可以把正数，负数，0的算术运算统一掉，具体怎么统一那个时候一直很疑惑。知道几个星期前我上网查了才明白。</p>
-<p>首先CPU中的运算器只能执行加法运算，不能执行减法运算，但是减法运算可以转化成加上一个负数的加法运算。</p>
-<p>第二个条件是计算机是有字长的，也就是说会有溢出的产生。（溢出是什么，你们自己百度吧，大概意思就是数据太大寄存器无法表示，就丢弃了一些数据）</p>
-<p>补码的诞生主要是为了解决将减法转化成加法的问题。</p>
-<p>考虑时钟上时间的计算，假设现在时针指向数字3，若问“6小时前时针指向的数字是几”，则可以：</p>
-<ol>
-<li>将时针逆时针拨动6格。</li>
-<li>将时针顺时针拨动12 - 6 = 6格。</li>
-</ol>
-<p>这两种方式的结果是一样的。这里称12是“模。</p>
-<p>故有 3时 - 6个小时 = 3时 + （12 - 6个小时），这里可以看到将减法转换成加法的过程，即“加上模减去绝对值的差”。</p>
-<p>而我们知道，计算机是有字长的，通过这个思想我们就可以把计算机中的减法转化成加上一个“正整数”的方式来做了。</p>
-<p>计算机中算术运算的模就是2的计算机字长次方。也就是最小能产生溢出的正整数。</p>
-<p>所以x的补码的计算 x的补码 ＝ 2^n - x(n是计算机的字长)<br>同时x + !x + 1 = 2^n(!x表示对x进行取反操作)<br>所以x = !x + 1（这就是这个计算公式的由来）</p>
-<p>参考网址：<a href="http://www.douban.com/note/223507364/" target="_blank" rel="external">http://www.douban.com/note/223507364/</a> (大神真是活跃于各个社区)</p>
-<p><a href="http://www.zhihu.com/question/20159860" target="_blank" rel="external">http://www.zhihu.com/question/20159860</a></p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://mreleven.com/2014/12/11/Python中几个常用的属性访问包装器/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Mr.Eleven">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="http://mreleven.oss-cn-hangzhou.aliyuncs.com/blog/270356B2-2258-4753-AC46-0A4CEC06DF78.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Eleven's blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2014/12/11/Python中几个常用的属性访问包装器/" itemprop="url">Python常用包装器</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2014-12-11T00:00:00+08:00">
-                2014-12-11
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Python/" itemprop="url" rel="index">
-                    <span itemprop="name">Python</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">pass</div></pre></td></tr></table></figure>
-<p>其实很多东西都已经在<a href="https://www.python.org上面有了。该好好看看上面的文档。" target="_blank" rel="external">https://www.python.org上面有了。该好好看看上面的文档。</a></p>
-<p>关于包装器的部分：<a href="https://docs.python.org/2/reference/datamodel.html" target="_blank" rel="external">https://docs.python.org/2/reference/datamodel.html</a></p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1883,7 +1883,7 @@ jr    $ra                # 将控制权转移给调用者
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">43</span>
+                <span class="site-state-item-count">45</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -1947,7 +1947,7 @@ jr    $ra                # 将控制权转移给调用者
         <div class="copyright" >
   
   &copy; 
-  <span itemprop="copyrightYear">2017</span>
+  <span itemprop="copyrightYear">2018</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
