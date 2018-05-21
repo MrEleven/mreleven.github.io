@@ -110,7 +110,7 @@
   var CONFIG = {
     root: '/',
     scheme: 'Muse',
-    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false,"onmobile":false},
+    sidebar: {"position":"left","display":"remove","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false,"onmobile":false},
     fancybox: true,
     motion: true,
     duoshuo: {
@@ -218,12 +218,22 @@
         </li>
       
         
-        <li class="menu-item menu-item-tags">
-          <a href="/tags/" rel="section">
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
             
-            标签
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-bucketlist">
+          <a href="/bucketlist/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br />
+            
+            遗愿
           </a>
         </li>
       
@@ -246,148 +256,6 @@
           <div id="content" class="content">
             
   <section id="posts" class="posts-expand">
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://mreleven.com/2016/03/12/关于值与引用/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Mr.Eleven">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="http://mreleven.oss-cn-hangzhou.aliyuncs.com/blog/270356B2-2258-4753-AC46-0A4CEC06DF78.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Eleven's blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2016/03/12/关于值与引用/" itemprop="url">关于值与引用</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-03-12T00:00:00+08:00">
-                2016-03-12
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/java/" itemprop="url" rel="index">
-                    <span itemprop="name">java</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>自从到了新公司，就开始了苦逼的java学习。新公司忙成🐶，每天基本上都是10点左右才离开公司。</p>
-<p>今天感冒请假在家，想到自己已经很长时间没有学习了。不学习就不会成长，毕竟大杭州90%公司的核心开发语言都是Java，于是在知乎上找各位大牛的Java学习路线，发现了之前有个一直不适很清楚的概念，Java中的值传递和引用传递。</p>
-<ul>
-<li>关于值类型和引用类型。值类型是java中所有的基本类型，而引用类型是指对象类型。(Integer和Long这种包装器也是引用类型，只是他们在某些情况下编译器中会转化成它包装的基本类型)。用来区分引用类型和值类型只有一个标准，它的内存分配是在堆上还是在栈上。</li>
-<li>mutate和change，mutate表示堆上内存的改变，change表示变量名重新指到一个新的内存地址，原本指向的内容不变。</li>
-<li>值传递与引用传递。函数调用参数传递本身都是值的传递，值类型传递一份本身的拷贝，引用类型传递一份引用的地址拷贝。由于函数调用会创建新的栈帧，所以形参的作用域只是函数内部，对形参变量名的赋值不会对函数之外产生影响，所以我们永远也无法在函数内改变函数外的实参的引用地址。所以我们只能对实参进行mutate操作，不能进行change操作。</li>
-</ul>
-<p>不扯淡，睡觉了。<a href="https://www.zhihu.com/question/20628016" target="_blank" rel="external">知乎原文地址</a></p>
-<p>明天回来看闭包。 <a href="https://www.zhihu.com/question/27460623/answer/36747015" target="_blank" rel="external">first class function</a></p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
     
       
 
@@ -1839,6 +1707,142 @@ jr    $ra                # 将控制权转移给调用者
 
 
     
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://mreleven.com/2014/12/11/Python中几个常用的属性访问包装器/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Mr.Eleven">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://mreleven.oss-cn-hangzhou.aliyuncs.com/blog/270356B2-2258-4753-AC46-0A4CEC06DF78.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Eleven's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2014/12/11/Python中几个常用的属性访问包装器/" itemprop="url">Python常用包装器</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2014-12-11T00:00:00+08:00">
+                2014-12-11
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Python/" itemprop="url" rel="index">
+                    <span itemprop="name">Python</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">pass</div></pre></td></tr></table></figure>
+<p>其实很多东西都已经在<a href="https://www.python.org上面有了。该好好看看上面的文档。" target="_blank" rel="external">https://www.python.org上面有了。该好好看看上面的文档。</a></p>
+<p>关于包装器的部分：<a href="https://docs.python.org/2/reference/datamodel.html" target="_blank" rel="external">https://docs.python.org/2/reference/datamodel.html</a></p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
   </section>
 
   
@@ -1855,95 +1859,6 @@ jr    $ra                # 将控制权转移给调用者
           
 
         </div>
-        
-          
-  
-  <div class="sidebar-toggle">
-    <div class="sidebar-toggle-line-wrap">
-      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
-      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
-      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
-    </div>
-  </div>
-
-  <aside id="sidebar" class="sidebar">
-    
-    <div class="sidebar-inner">
-
-      
-
-      
-
-      <section class="site-overview sidebar-panel sidebar-panel-active">
-        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-          <img class="site-author-image" itemprop="image"
-               src="http://mreleven.oss-cn-hangzhou.aliyuncs.com/blog/270356B2-2258-4753-AC46-0A4CEC06DF78.png"
-               alt="Mr.Eleven" />
-          <p class="site-author-name" itemprop="name">Mr.Eleven</p>
-           
-              <p class="site-description motion-element" itemprop="description">蚂蚁没见过大海，不代表沧海不存在！</p>
-          
-        </div>
-        <nav class="site-state motion-element">
-
-          
-            <div class="site-state-item site-state-posts">
-              <a href="/archives/">
-                <span class="site-state-item-count">44</span>
-                <span class="site-state-item-name">日志</span>
-              </a>
-            </div>
-          
-
-          
-            
-            
-            <div class="site-state-item site-state-categories">
-              
-                <span class="site-state-item-count">17</span>
-                <span class="site-state-item-name">分类</span>
-              
-            </div>
-          
-
-          
-            
-            
-            <div class="site-state-item site-state-tags">
-              
-                <span class="site-state-item-count">19</span>
-                <span class="site-state-item-name">标签</span>
-              
-            </div>
-          
-
-        </nav>
-
-        
-
-        <div class="links-of-author motion-element">
-          
-        </div>
-
-        
-        
-
-        
-        
-
-        
-
-
-      </section>
-
-      
-
-      
-
-    </div>
-  </aside>
-
-
         
       </div>
     </main>
@@ -1966,7 +1881,9 @@ jr    $ra                # 将控制权转移给调用者
 </div>
 
 <div class="theme-info">
-  主题 -
+  主题 - 
+由 <a class="theme-link" href="http://mreleven.com">Mr.Eleven</a>
+修改自
   <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
     NexT.Muse
   </a>
