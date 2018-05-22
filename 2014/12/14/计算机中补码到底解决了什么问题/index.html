@@ -100,6 +100,7 @@
 <meta property="og:url" content="http://mreleven.com/2014/12/14/计算机中补码到底解决了什么问题/index.html">
 <meta property="og:site_name" content="Eleven&#39;s blog">
 <meta property="og:description" content="大学的时候计算机组成原理曾经说过原码，反码，补码这三种整数的表示类型。那个时候2B一样，只知道通过这些可以把正数，负数，0的算术运算统一掉，具体怎么统一那个时候一直很疑惑。知道几个星期前我上网查了才明白。 首先CPU中的运算器只能执行加法运算，不能执行减法运算，但是减法运算可以转化成加上一个负数的加法运算。 第二个条件是计算机是有字长的，也就是说会有溢出的产生。（溢出是什么，你们自己百度吧，大概">
+<meta property="og:locale" content="zh-Hans">
 <meta property="og:updated_time" content="2017-07-18T14:08:10.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="计算机中补码到底解决了什么问题">
@@ -366,8 +367,8 @@
 <p>而我们知道，计算机是有字长的，通过这个思想我们就可以把计算机中的减法转化成加上一个“正整数”的方式来做了。</p>
 <p>计算机中算术运算的模就是2的计算机字长次方。也就是最小能产生溢出的正整数。</p>
 <p>所以x的补码的计算 x的补码 ＝ 2^n - x(n是计算机的字长)<br>同时x + !x + 1 = 2^n(!x表示对x进行取反操作)<br>所以x = !x + 1（这就是这个计算公式的由来）</p>
-<p>参考网址：<a href="http://www.douban.com/note/223507364/" target="_blank" rel="external">http://www.douban.com/note/223507364/</a> (大神真是活跃于各个社区)</p>
-<p><a href="http://www.zhihu.com/question/20159860" target="_blank" rel="external">http://www.zhihu.com/question/20159860</a></p>
+<p>参考网址：<a href="http://www.douban.com/note/223507364/" target="_blank" rel="noopener">http://www.douban.com/note/223507364/</a> (大神真是活跃于各个社区)</p>
+<p><a href="http://www.zhihu.com/question/20159860" target="_blank" rel="noopener">http://www.zhihu.com/question/20159860</a></p>
 
       
     </div>

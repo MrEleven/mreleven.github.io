@@ -100,6 +100,7 @@
 <meta property="og:url" content="http://mreleven.com/2014/12/18/以机器指令的角度看过程调用/index.html">
 <meta property="og:site_name" content="Eleven&#39;s blog">
 <meta property="og:description" content="最近真是闲得蛋疼啊，看完了第二遍《Python源码剖析》之后开始看计算机组成原理。 回顾一下，自从接触了Python，扯了一大堆东西。从windows转移到Linux(现在用的是OS X—苹果系统)。从VS2012转移到vim，再到现在得emacs。从Sql Server到Mysql。从web开发，桌面应用开发，到各种服务和api的开发。 从米帮的基础框架sputnik开始扯，到看tornado源">
+<meta property="og:locale" content="zh-Hans">
 <meta property="og:updated_time" content="2017-07-18T14:08:10.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="以机器指令的角度看过程调用">
@@ -356,7 +357,7 @@
 <p>回顾一下，自从接触了Python，扯了一大堆东西。从windows转移到Linux(现在用的是OS X—苹果系统)。从VS2012转移到vim，再到现在得emacs。从Sql Server到Mysql。从web开发，桌面应用开发，到各种服务和api的开发。</p>
 <p>从米帮的基础框架sputnik开始扯，到看tornado源码，然后学HTTP协议和Linux IO多路复用模型，然后到C语言基础，然后到各种算法和数据结构，然后到编译原理，然后到现在的计算机组成原理。好大的一个栈。不知道什么时候能够全部出栈，不知道接下去是不是还要继续把状态机，图灵机什么的也压入栈。不得不感慨一句：跳出.net，外面又是一个十分广阔的世界。</p>
 <p>好吧，不扯远了。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">int leaf_example(int g, int h, int i, int j)</div><div class="line">&#123;</div><div class="line">	int f;</div><div class="line"></div><div class="line">	f = (g + h) - (i + j);</div><div class="line">	return f;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">int leaf_example(int g, int h, int i, int j)</span><br><span class="line">&#123;</span><br><span class="line">	int f;</span><br><span class="line"></span><br><span class="line">	f = (g + h) - (i + j);</span><br><span class="line">	return f;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <pre>
 leaf_example:
 # 保存现场

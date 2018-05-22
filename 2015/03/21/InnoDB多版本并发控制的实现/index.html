@@ -100,6 +100,7 @@
 <meta property="og:url" content="http://mreleven.com/2015/03/21/InnoDB多版本并发控制的实现/index.html">
 <meta property="og:site_name" content="Eleven&#39;s blog">
 <meta property="og:description" content="MySQL的大多数事务型存储引擎的都不是简单的行级锁，基于提升并发性能的考虑，它们一般都同时实现了多版本并发控制(MVCC)。 InnoDB的MVCC是通过在每行记录后面保存两个隐藏的列来实现的。一个保存了行的创建时间，一个保存了行的过期时间（删除时间）。当然存储的并不是世纪的时间值，而是系统版本号。每开始一个新的事务，系统版本号都会自动递增。事务开始时刻的系统版本号会作为事务的版本号，用来和查询">
+<meta property="og:locale" content="zh-Hans">
 <meta property="og:updated_time" content="2017-07-18T14:08:10.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="InnoDB中多版本并发控制的实现">
@@ -365,7 +366,7 @@
 <h1 id="Update"><a href="#Update" class="headerlink" title="Update"></a>Update</h1><p>InnoDB为插入一行新记录，保存当前系统版本号作为行版本号，同时保存当前系统版本号到原来的行作为行删除标识。</p>
 <p>大道至简。这个设计真是碉堡了。帅。</p>
 <p>DBA也是一条不归路呀。最近又重新开始看《高性能MySQL》，发现还远远不够，还是要去卡看InnoDB的相关资料。</p>
-<p>PS：附上一个git教程，感觉蛮好的，励志成为Git骨灰级玩家。<a href="http://blog.csdn.net/fanwenbo/article/details/8670523" target="_blank" rel="external">http://blog.csdn.net/fanwenbo/article/details/8670523</a></p>
+<p>PS：附上一个git教程，感觉蛮好的，励志成为Git骨灰级玩家。<a href="http://blog.csdn.net/fanwenbo/article/details/8670523" target="_blank" rel="noopener">http://blog.csdn.net/fanwenbo/article/details/8670523</a></p>
 
       
     </div>
