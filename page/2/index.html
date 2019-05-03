@@ -267,6 +267,125 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://mreleven.com/2017/08/30/有效的单元测试/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Mr.Eleven">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://mreleven.oss-cn-hangzhou.aliyuncs.com/blog/270356B2-2258-4753-AC46-0A4CEC06DF78.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Eleven's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/08/30/有效的单元测试/" itemprop="url">有效的单元测试</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-30T11:05:22+08:00">
+                2017-08-30
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>实践了一段时间的单元测试，碰到了不少疑惑。有些疑惑已经被解了，比如单元测试走不走DB，测试替身等。还剩下一些疑惑，单元测试粒度的把握(目前我的粒度是一个类一个用例)，测试用例的维护问题。<br>于是就抱着疑惑看了一本书《有效的单元测试》。然而这本书是一本小白的入门书，并没有解开我的疑惑，或许我的疑惑应该去看看架构和建模相关的书籍。<br>不过这本书中提到了一些关于可测试性代码设计的问题，还是非常有价值的，比如</p>
+<ol>
+<li>创建对象尽量不要用new，用注入会更加容易替换成测试替身。</li>
+<li>避免使用final修饰方法(因为无法被测试替身替换)。</li>
+<li>避免使用复杂的私有方法(想想是否应该封装到另一个对象中，成为一个public方法)。</li>
+<li>不是单纯的计算逻辑，最好不要用static方法。</li>
+<li>组合优于继承。</li>
+</ol>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="http://mreleven.com/2017/07/25/BootStrap全局CSS样式与组件/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1525,148 +1644,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://mreleven.com/2016/03/12/关于值与引用/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Mr.Eleven">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="http://mreleven.oss-cn-hangzhou.aliyuncs.com/blog/270356B2-2258-4753-AC46-0A4CEC06DF78.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Eleven's blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2016/03/12/关于值与引用/" itemprop="url">关于值与引用</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-03-12T00:00:00+08:00">
-                2016-03-12
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/java/" itemprop="url" rel="index">
-                    <span itemprop="name">java</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>自从到了新公司，就开始了苦逼的java学习。新公司忙成🐶，每天基本上都是10点左右才离开公司。</p>
-<p>今天感冒请假在家，想到自己已经很长时间没有学习了。不学习就不会成长，毕竟大杭州90%公司的核心开发语言都是Java，于是在知乎上找各位大牛的Java学习路线，发现了之前有个一直不适很清楚的概念，Java中的值传递和引用传递。</p>
-<ul>
-<li>关于值类型和引用类型。值类型是java中所有的基本类型，而引用类型是指对象类型。(Integer和Long这种包装器也是引用类型，只是他们在某些情况下编译器中会转化成它包装的基本类型)。用来区分引用类型和值类型只有一个标准，它的内存分配是在堆上还是在栈上。</li>
-<li>mutate和change，mutate表示堆上内存的改变，change表示变量名重新指到一个新的内存地址，原本指向的内容不变。</li>
-<li>值传递与引用传递。函数调用参数传递本身都是值的传递，值类型传递一份本身的拷贝，引用类型传递一份引用的地址拷贝。由于函数调用会创建新的栈帧，所以形参的作用域只是函数内部，对形参变量名的赋值不会对函数之外产生影响，所以我们永远也无法在函数内改变函数外的实参的引用地址。所以我们只能对实参进行mutate操作，不能进行change操作。</li>
-</ul>
-<p>不扯淡，睡觉了。<a href="https://www.zhihu.com/question/20628016" target="_blank" rel="noopener">知乎原文地址</a></p>
-<p>明天回来看闭包。 <a href="https://www.zhihu.com/question/27460623/answer/36747015" target="_blank" rel="noopener">first class function</a></p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1692,7 +1669,7 @@
         <div class="copyright" >
   
   &copy; 
-  <span itemprop="copyrightYear">2018</span>
+  <span itemprop="copyrightYear">2019</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
